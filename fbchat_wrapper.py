@@ -182,6 +182,6 @@ class Wrapper(fbchat.Client):
                 I1.text(((2+y)*20 + 10,(i+1)*10),x,(255,255,0),font)
             I1.text((3*20 + 50,(i+1)*10),helpdict[name]["description"],(255,255,255),font)
 
-        I1.text((220,290),"Marian3 beta", (190,255,190),font)
+        I1.text((220,290),"marian3 beta", (190,255,190),font)
         img.save("./help.png")
         return "./help.png"
