@@ -73,7 +73,7 @@ class Wrapper(fbchat.Client):
             self.reply(f"{commandName} is an invalid command")
             raise CommandNotRegisteredException
         
-        command = self._commandList["commands"][commandName][0]
+        command = self._commandList[commandName][0]
 
         # argument separation
         argsdict = dict()
@@ -81,7 +81,13 @@ class Wrapper(fbchat.Client):
             argsdict.update({x:args[i]})
         
 
-        t = threading.Thread(target=command,args=(self.text, argsdict,  self.thread, self.author, message_object))
+        t = threading.Thread(target=command,
+                            kwargs={"text":self.text,
+                                    "args":argsdict,
+                                    "thread":self.thread,
+                                    "author":self.author,
+                                    "message":message_object}
+       )
         t.start()
             
 
@@ -98,7 +104,7 @@ class Wrapper(fbchat.Client):
         thread_id, thread_type = thread
         self.send(fbchat.Message(text=text,reply_to_id=self.mid),thread_id=thread_id,thread_type=thread_type)
         
-    def sendFile(self, filepath, thread):
+    def sendFile(self, filepath, thread = None):
         if thread is None:
             thread = self.thread   
         thread_id, thread_type = thread
@@ -151,14 +157,16 @@ class Wrapper(fbchat.Client):
         return self.fetchUserInfo(id)[id].name
 
     def utils_genHelpImg(self) -> str:
-        helpdict = dict(commands={})
-        for x in self._commandList:
-            helpdict["commands"].update({
-                "name":x, 
+        helpdict = dict()
+        for x in self._commandList.keys():
+            helpdict.update({
+                x:{
                 "description":self._commandList[x][2],
-                "args":self._commandList[x][1]})
+                "args":self._commandList[x][1]}}
+                )
         
         Commands = self._commandList.keys()
+        print(helpdict, self._commandList)
         # desciption = 2
         # args = 1
         # func = 0
@@ -168,6 +176,13 @@ class Wrapper(fbchat.Client):
         I1 = ImageDraw.Draw(img)
         font = ImageFont.truetype("./font.ttf")
 
-        for i, name in enumerate(helpdict["commands"]["name"]):
+        for i, name in enumerate(helpdict):
+
             I1.text((1*20,(i+1)*10),name,(255,255,255),font)
-            
+            for y,x in enumerate(helpdict[name]["args"]):
+                I1.text(((2+y)*20 + 10,(i+1)*10),x,(255,255,0),font)
+            I1.text((3*20 + 50,(i+1)*10),helpdict[name]["description"],(255,255,255),font)
+
+        I1.text((220,290),"Marian3 beta", (190,255,190),font)
+        img.save("./help.png")
+        return "./help.png"

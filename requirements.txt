@@ -1,2 +1,8 @@
-git+https://github.com/SneznyKocur/fbchat
-validators
+git+https://github.com/SneznyKocur/fbchat 
+validators 
+pillow 
+gtts 
+google_images_search 
+googletrans 
+ffmpeg 
+pytube 
