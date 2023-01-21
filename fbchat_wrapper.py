@@ -8,6 +8,8 @@ from PIL import ImageFont
 import ffmpeg
 import os
 import logging
+import json
+
 
 class CommandNotRegisteredException(Exception):
     pass
@@ -47,10 +49,10 @@ class Wrapper(fbchat.Client):
             break
         return part.replace('"', "")
 
-    def onMessage(self,author_id,message_object, thread_id, thread_type, **kwargs):
+    def onMessage(self,author_id,message_object, thread_id, thread_type, ts, **kwargs):
         if message_object.author == self.uid:
             return
-        logging.info(f"Succesfully Registered {len(self._commandList)}")
+        logging.info(f"Succesfully Registered {len(self._commandList)} commands")
         self.mid = message_object.uid
         self.markAsDelivered(thread_id, message_object.uid)
         self.markAsRead(thread_id)
@@ -58,6 +60,19 @@ class Wrapper(fbchat.Client):
         self.text = message_object.text
         self.author = self.utils_getUserName(author_id)
         logging.info(f"Recieved {self.text} from {self.author}")
+
+        with open(os.getcwd() + "/messages.txt", "r") as f:
+                lol = json.load(f)
+                import datetime
+                lol["messages"].update(
+                    {message_object.uid:
+                     {message_object.text: self.utils_getUserName(author_id),
+                      "time": datetime.datetime.fromtimestamp(ts // 1000).isoformat(),
+                      "unsent": False,
+                      "Version": f"marian3 beta"}})
+        with open(os.getcwd() + "/messages.txt", "w", encoding="utf-8") as f:
+            json.dump(lol, f, indent=1)
+
         if not self.text.startswith(self.Prefix):
             return
 
@@ -89,6 +104,14 @@ class Wrapper(fbchat.Client):
        )
         t.start()
             
+    def onMessageUnsent(self, mid, author_id, thread_id, thread_type, ts, msg):
+        if author_id != self.uid:
+            with open(os.getcwd() + "/messages.txt", "r") as f:
+                lol = json.load(f)
+                lol["messages"][mid]["UNSENT"] = True
+
+            with open(os.getcwd() + "/messages.txt", "w", encoding="utf-8") as f:
+                json.dump(lol, f)
 
     def sendmsg(self, text: str, thread: tuple = None):
         if thread is None:
