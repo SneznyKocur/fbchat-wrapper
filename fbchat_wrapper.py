@@ -7,58 +7,57 @@ from PIL import ImageDraw
 from PIL import ImageFont
 import ffmpeg
 import os
+import logging
 
 class CommandNotRegisteredException(Exception):
     pass
 
 class Wrapper(fbchat.Client):
     def __init__(self, email: str, password: str, prefix = ""):
-        
+        format = "[%(levelname)s] [%(asctime)s]:  %(message)s"
+        logging.basicConfig(format=format, datefmt='%m/%d/%Y %I:%M:%S',level=logging.INFO)
         self._commandList = dict()
         self.Prefix = prefix or "!"
         super(Wrapper, self).__init__(email,password)
+        
     def _addCommand(self, name: str, func, args: list, description: str = None):
         self._commandList.update({f"{name}":[func, args, description]})
-        print(self._commandList)
 
     def Command(self,name: str, args: list, description: str = None):
         def wrapper(func):
             self._addCommand(name, func, args, description)
         return wrapper
 
-
+   
     def _argSplit(self, _args):
         part = ""
         for i, x in enumerate(_args.split(" ")[1:]):
             if x.startswith('"'):
                 
                 for chunk in _args.split(" ")[i+1:]:
-                    print(chunk)
                     if chunk.endswith('"'):
                         part+=" "+chunk
-                        print("chunk ends")
                         break
                     else:
                         part+=" "+chunk
-                        print("chunk continues")
                         continue
                 break
             else:
                 part += x 
-                print(part)
             break
         return part.replace('"', "")
 
     def onMessage(self,author_id,message_object, thread_id, thread_type, **kwargs):
         if message_object.author == self.uid:
             return
+        logging.info(f"Succesfully Registered {len(self._commandList)}")
         self.mid = message_object.uid
         self.markAsDelivered(thread_id, message_object.uid)
         self.markAsRead(thread_id)
         self.thread = (thread_id,thread_type)
         self.text = message_object.text
         self.author = self.utils_getUserName(author_id)
-
+        logging.info(f"Recieved {self.text} from {self.author}")
         if not self.text.startswith(self.Prefix):
             return
 
@@ -99,8 +98,7 @@ class Wrapper(fbchat.Client):
     
     def reply(self, text: str, thread: tuple = None):
         if thread is None:
-            thread = self.thread
-        print(self.mid)    
+            thread = self.thread  
         thread_id, thread_type = thread
         self.send(fbchat.Message(text=text,reply_to_id=self.mid),thread_id=thread_id,thread_type=thread_type)
         
@@ -116,6 +114,8 @@ class Wrapper(fbchat.Client):
 
 
 
+    def utils_isURL(input):
+        return validators.url(input)
 
     def utils_compressVideo(input, output):
         import ffmpeg
@@ -166,7 +166,6 @@ class Wrapper(fbchat.Client):
                 )
         
         Commands = self._commandList.keys()
-        print(helpdict, self._commandList)
         # desciption = 2
         # args = 1
         # func = 0
@@ -178,7 +177,7 @@ class Wrapper(fbchat.Client):
 
         for i, name in enumerate(helpdict):
 
-            I1.text((1*20,(i+1)*10),name,(255,255,255),font)
+            I1.text((1*0,(i+1)*10),name,(255,255,255),font)
             for y,x in enumerate(helpdict[name]["args"]):
                 I1.text(((2+y)*20 + 10,(i+1)*10),x,(255,255,0),font)
             I1.text((3*20 + 50,(i+1)*10),helpdict[name]["description"],(255,255,255),font)
