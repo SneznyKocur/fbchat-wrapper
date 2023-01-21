@@ -1,13 +1,16 @@
 # fbchat wrapper
 
 # example echo bot:
-```import fbchat_wrapper as fbw
+```
+import fbchat_wrapper as fbw
 
 client = fbw.Wrapper(prefix="!", email="", password="")
 
-@client.Command()
-def test(text,args,thread,author,message):
-    client.reply(text)
+@client.Command("say", ["message"], "Sends Message")
+def say(text,args,thread,author,message):
+    if args:
+        client.reply(args["message"])
 
 
-client.listen()```
+client.listen()
+```
