@@ -63,6 +63,7 @@ class Wrapper(fbchat.Client):
 
             
         if not commandName in self._commandList:
+            self.reply(f"{commandName} is an invalid command")
             raise CommandNotRegisteredException
         
         command = self._commandList[commandName][0]
