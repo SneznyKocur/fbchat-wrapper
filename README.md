@@ -1,7 +1,7 @@
 # fbchat wrapper
 
 # example echo bot:
-'''import fbchat_wrapper as fbw
+```import fbchat_wrapper as fbw
 
 client = fbw.Wrapper(prefix="!", email="", password="")
 
@@ -10,4 +10,4 @@ def test(text,args,thread,author,message):
     client.reply(text)
 
 
-client.listen()'''
+client.listen()```
