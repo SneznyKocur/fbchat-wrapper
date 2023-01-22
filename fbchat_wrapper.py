@@ -140,7 +140,7 @@ class Wrapper(fbchat.Client):
     def utils_isURL(self, input):
         return validators.url(input)
 
-    def utils_compressVideo(input, output):
+    def utils_compressVideo(self, input, output):
         import ffmpeg
         # Reference: https://en.wikipedia.org/wiki/Bit_rate#Encoding_bit_rate
         min_audio_bitrate = 32000
