@@ -137,7 +137,7 @@ class Wrapper(fbchat.Client):
 
 
 
-    def utils_isURL(input):
+    def utils_isURL(self, input):
         return validators.url(input)
 
     def utils_compressVideo(input, output):
