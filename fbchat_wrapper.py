@@ -146,7 +146,7 @@ class Wrapper(fbchat.Client):
         min_audio_bitrate = 32000
         max_audio_bitrate = 256000
 
-        probe = ffmpeg.probe(input,cmd="./ffprobe")
+        probe = ffmpeg.probe(input)
         # Video duration, in s.
         duration = float(probe['format']['duration'])
         # Audio bitrate, in bps.
