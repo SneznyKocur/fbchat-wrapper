@@ -1,6 +1,6 @@
 # fbchat wrapper
-
-# example echo bot:
+[![Pylint](https://github.com/SneznyKocur/fbchat-wrapper/actions/workflows/pylint.yml/badge.svg)](https://github.com/SneznyKocur/fbchat-wrapper/actions/workflows/pylint.yml)
+### example echo bot:
 ```
 import fbchat_wrapper as fbw
 
