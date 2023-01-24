@@ -4,6 +4,5 @@ pillow
 gtts 
 google_images_search 
 googletrans 
-ffmpeg 
-pytube 
-windows-curses
+ffmpeg-python
+pytube
