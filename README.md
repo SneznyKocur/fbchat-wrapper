@@ -6,7 +6,7 @@ import fbchat_wrapper as fbw
 client = fbw.Wrapper(prefix="!", email="", password="")
 
 @client.Command("say", ["message"], "Sends Message")
-def say(**kwargs):
+def say(args,**kwargs):
     if args:
         client.reply(args["message"])
 
