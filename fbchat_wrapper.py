@@ -1,9 +1,9 @@
 import os
 import logging
 import json
-import validators
 import threading
 import datetime
+import validators
 import fbchat
 from fbchat.models import Message
 from PIL import Image
