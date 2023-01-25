@@ -5,5 +5,4 @@ gtts
 google_images_search 
 googletrans 
 ffmpeg-python
-pytube 
-windows-curses
+pytube
