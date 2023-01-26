@@ -1,3 +1,11 @@
+"""
+A simple wrapper for the fbchat library 
+please use only with https://github.com/SneznyKocur/fbchat
+
+Made with <3 by: SneznyKocur
+"""
+
+
 import os
 import logging
 import json
@@ -44,12 +52,10 @@ class Wrapper(fbchat.Client):
                     if chunk.endswith('"'):
                         part += " " + chunk
                         break
-                    else:
-                        part += " " + chunk
-                        continue
-                break
-            else:
-                part += x
+                    part += " " + chunk
+                    continue
+                break    
+            part += x
             break
         return part.replace('"', "")
 
