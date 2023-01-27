@@ -1,5 +1,9 @@
-A simple library to make programming in fbchat easier
-### example echo bot:
+# Fbchat-wrapper
+
+## A simple library to make programming in fbchat easier
+
+### example echo bot
+
 ```
 import fbchat_wrapper as fbw
 
@@ -13,7 +17,9 @@ def say(args,**kwargs):
 
 client.listen()
 ```
+
 Made with <3 by:
+
 ```
  ____                               _  __
 / ___| _ __   ___ _____ __  _   _  | |/ /___   ___ _   _ _ __
