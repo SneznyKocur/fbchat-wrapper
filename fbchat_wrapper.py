@@ -12,8 +12,9 @@ import json
 import threading
 import datetime
 import validators
+import string
 import fbchat
-from fbchat.models import Message
+from fbchat.models import Message, ThreadType
 from PIL import Image
 from PIL import ImageDraw
 
@@ -33,6 +34,7 @@ class Wrapper(fbchat.Client):
         )
         self._command_list = dict()
         self.Prefix = prefix or "!"
+        logging.info("logging in...")
         super(Wrapper, self).__init__(email, password)
 
     def _addCommand(self, name: str, func, args: list, description: str = None):
@@ -103,7 +105,7 @@ class Wrapper(fbchat.Client):
             raise CommandNotRegisteredException
 
         command = self._command_list[commandName][0]
-
+        logging.info(f"got {command} command")
         # argument separation
         argsdict = dict()
         for i, x in enumerate(self._command_list[commandName][1]):
@@ -209,6 +211,29 @@ class Wrapper(fbchat.Client):
     def utils_getUserName(self, id: int):
         return self.fetchUserInfo(id)[id].name
 
+    def utils_searchForUsers(self,query: str) -> list:
+        """
+        returns list of user ids for the query
+        """
+        _ = []
+        for user in self.searchForUsers(query):
+            _.append(user.uid)
+        return _
+    def utils_getThreadType(self,thread_id: int) -> ThreadType:
+        return self.fetchThreadInfo(thread_id)[thread_id].type
+
+    def utils_getThreadFromUserIndex(self,id: str) -> tuple:
+        if not string.ascii_letters in id: 
+            thread_type = self.utils_getThreadType(int(id))
+            thread_id = id
+            thread = (thread_id,thread_type)
+        else:
+            name = id.split("[")[0]
+            ids = self.utils_searchForUsers(name)
+            thread_id = ids[int(id.split("[").replace("]",""))]
+            thread_type = self.utils_getThreadType(int(thread_id))
+            thread = (thread_id,thread_type)
+        return thread
     def utils_genHelpImg(self) -> str:
         helpdict = dict()
         for x in self._command_list:
@@ -240,6 +265,6 @@ class Wrapper(fbchat.Client):
                 font,
             )
 
-        I1.text((220, 290), "marian3 beta", (190, 255, 190), font)
+        I1.text((100, 290), "marian3 v1.0.0, made with <3 by SneznyKocur", (190, 255, 190), font)
         img.save("./help.png")
         return "./help.png"
