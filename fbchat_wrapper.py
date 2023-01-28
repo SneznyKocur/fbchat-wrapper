@@ -7,7 +7,6 @@ Made with <3 by: SneznyKocur
 
 
 import os
-import logging
 import json
 import threading
 import datetime
@@ -28,13 +27,8 @@ class CommandNotRegisteredException(Exception):
 
 class Wrapper(fbchat.Client):
     def __init__(self, email: str, password: str, prefix=""):
-        logformat = "[%(levelname)s] [%(asctime)s]:  %(message)s"
-        logging.basicConfig(
-            format=logformat, datefmt="%m/%d/%Y %I:%M:%S", level=logging.INFO
-        )
         self._command_list = dict()
         self.Prefix = prefix or "!"
-        logging.info("logging in...")
         super(Wrapper, self).__init__(email, password)
 
     def _addCommand(self, name: str, func, args: list, description: str = None):
@@ -64,16 +58,18 @@ class Wrapper(fbchat.Client):
     def onMessage(
         self, author_id, message_object, thread_id, thread_type, ts, **kwargs
     ):
+        print("got message")
         if message_object.author == self.uid:
             return
-        logging.info(f"Succesfully Registered {len(self._command_list)} commands")
         self.mid = message_object.uid
-        self.markAsDelivered(thread_id, message_object.uid)
-        self.markAsRead(thread_id)
+        try:
+            self.markAsDelivered(thread_id, message_object.uid)
+            self.markAsRead(thread_id)
+        except:
+            print("Failed to mark as read")
         self.thread = (thread_id, thread_type)
         self.text = message_object.text
         self.author = self.utils_getUserName(author_id)
-        logging.info(f"Recieved {self.text} from {self.author}")
 
         with open(os.getcwd() + "/messages.txt", "r") as f:
             lol = json.load(f)
@@ -105,12 +101,11 @@ class Wrapper(fbchat.Client):
             raise CommandNotRegisteredException
 
         command = self._command_list[commandName][0]
-        logging.info(f"got {command} command")
         # argument separation
         argsdict = dict()
         for i, x in enumerate(self._command_list[commandName][1]):
             argsdict.update({x: args[i]})
-
+        print(f"calling command {command} in {self.thread[0]}")
         t = threading.Thread(
             target=command,
             kwargs={
@@ -141,6 +136,7 @@ class Wrapper(fbchat.Client):
     def reply(self, text: str, thread: tuple = None):
         if thread is None:
             thread = self.thread
+        print(thread[0])
         thread_id, thread_type = thread
         self.send(
             fbchat.Message(text=text, reply_to_id=self.mid),
@@ -223,17 +219,21 @@ class Wrapper(fbchat.Client):
         return self.fetchThreadInfo(thread_id)[thread_id].type
 
     def utils_getThreadFromUserIndex(self,id: str) -> tuple:
-        if not string.ascii_letters in id: 
+        if id.isnumeric(): 
             thread_type = self.utils_getThreadType(int(id))
             thread_id = id
             thread = (thread_id,thread_type)
         else:
             name = id.split("[")[0]
             ids = self.utils_searchForUsers(name)
-            thread_id = ids[int(id.split("[").replace("]",""))]
-            thread_type = self.utils_getThreadType(int(thread_id))
+            thread_id = ids[int(id.split("[")[1].replace("]",""))]
+            thread_type = self.utils_getThreadType(int(thread_id)) 
             thread = (thread_id,thread_type)
         return thread
+    def utils_getIDFromUserIndex(self, id:str) -> int:
+        name = id.split("[")[0]
+        ids = self.utils_searchForUsers(name)
+        return ids[int(id.split("[")[1].replace("]",""))]
     def utils_genHelpImg(self) -> str:
         helpdict = dict()
         for x in self._command_list:
@@ -255,16 +255,18 @@ class Wrapper(fbchat.Client):
 
         for i, name in enumerate(helpdict):
 
-            I1.text((1 * 0, (i + 1) * 10), name, (255, 255, 255), font)
+            I1.text((0, (i + 1) * 10), name, (255, 255, 255), font) # name
+        
             for y, x in enumerate(helpdict[name]["args"]):
-                I1.text(((2 + y) * 20 + 10, (i + 1) * 10), x, (255, 255, 0), font)
+                I1.text(((5+7*y) * 10, (i + 1) * 10), x, (255, 255, 0), font) # args
+
             I1.text(
-                (3 * 20 + 50, (i + 1) * 10),
+                (4 * 20 + 100, (i + 1) * 10),
                 helpdict[name]["description"],
                 (255, 255, 255),
                 font,
             )
 
-        I1.text((100, 290), "marian3 v1.0.0, made with <3 by SneznyKocur", (190, 255, 190), font)
+        I1.text((0, 290), "marian3 v1.0.0, made with <3 by SneznyKocur", (190, 255, 190), font)
         img.save("./help.png")
         return "./help.png"
