@@ -40,20 +40,25 @@ class Wrapper(fbchat.Client):
 
         return wrapper
 
-    def _arg_split(self, _args):
+    def _arg_split(args):
+        inside = False
+        end = list()
         part = ""
-        for i, x in enumerate(_args.split(" ")[1:]):
-            if x.startswith('"'):
-                for chunk in _args.split(" ")[i + 1 :]:
-                    if chunk.endswith('"'):
-                        part += " " + chunk
-                        break
-                    part += " " + chunk
-                    continue
-                break    
-            part += x
-            break
-        return part.replace('"', "")
+        for char in args:
+            if char == '"':
+                inside = not inside
+                if not inside:
+                    end.append(part)
+            elif char == " ":
+                if inside:
+                    part+=char
+                else:
+                    end.append(part)
+                    part = ""
+            else:
+                part+=char
+        end.append(part)
+        return list(dict.fromkeys(end[1:]))
 
     def onMessage(
         self, author_id, message_object, thread_id, thread_type, ts, **kwargs
@@ -91,10 +96,11 @@ class Wrapper(fbchat.Client):
             return
 
         commandName = self.text.replace(self.Prefix, "", 1).split(" ")[0]
-        _args = self.text.replace(self.Prefix, "", 1).replace(commandName, "", 1)
-        part = self._arg_split(_args)
         args = list()
-        args.append(part)
+        _args = self.text.replace(self.Prefix, "", 1).replace(commandName, "", 1)
+        parts = self._arg_split(_args)
+        for part in parts:
+            args.append(part)
 
         if not commandName in self._command_list:
             self.reply(f"{commandName} is an invalid command")
