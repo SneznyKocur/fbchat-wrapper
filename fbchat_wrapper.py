@@ -133,25 +133,24 @@ class Wrapper(fbchat.Client):
         thread_id, thread_type = thread
         self.send(Message(text=text), thread_id=thread_id, thread_type=thread_type)
 
-    def reply(self, text: str, thread: tuple = None):
+    def reply(self, text: str, thread: tuple = None) -> tuple:
         if thread is None:
             thread = self.thread
-        print(thread[0])
         thread_id, thread_type = thread
         self.send(
             fbchat.Message(text=text, reply_to_id=self.mid),
             thread_id=thread_id,
             thread_type=thread_type,
         )
-
-    def sendFile(self, filepath, thread=None):
+        return thread
+    def sendFile(self, filepath, message: str = None, thread=None) -> tuple:
         if thread is None:
             thread = self.thread
         thread_id, thread_type = thread
         if validators.url(filepath):
-            self.sendRemoteFiles(filepath, thread_id=thread_id, thread_type=thread_type)
+            self.sendRemoteFiles(filepath,message=message, thread_id=thread_id, thread_type=thread_type)
         else:
-            self.sendLocalFiles(filepath, thread_id=thread_id, thread_type=thread_type)
+            self.sendLocalFiles(filepath, message=message, thread_id=thread_id, thread_type=thread_type)
 
     def utils_isURL(self, input):
         return validators.url(input)
