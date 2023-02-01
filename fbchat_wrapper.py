@@ -78,6 +78,7 @@ class Wrapper(fbchat.Client):
         self.text = message_object.text
         self.author = self.utils_getUserName(author_id)
 
+        if not self.text: return
         with open(os.getcwd() + "/messages.txt", "r") as f:
             lol = json.load(f)
 
@@ -122,6 +123,7 @@ class Wrapper(fbchat.Client):
                 "thread": self.thread,
                 "author": self.author,
                 "message": message_object,
+                "ts": ts
             },
         )
         t.start()
