@@ -2,6 +2,8 @@
 A simple wrapper for the fbchat library 
 please use only with https://github.com/SneznyKocur/fbchat
 
+Please Contribute as my code probably sucks :/
+
 Made with <3 by: SneznyKocur
 """
 
@@ -40,7 +42,7 @@ class Wrapper(fbchat.Client):
 
         return wrapper
 
-    def _arg_split(args):
+    def _arg_split(self,args):
         inside = False
         end = list()
         part = ""
