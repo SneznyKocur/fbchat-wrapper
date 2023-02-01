@@ -1,5 +1,7 @@
 test*.py
 __pycache__
-help.png
-tts.mp3
-messages.txt
+*.png
+*.mp3
+*.txt
+*.mp4
+ff*.*
