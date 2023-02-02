@@ -1,6 +1,7 @@
 """
 A simple wrapper for the fbchat library 
 please use only with https://github.com/SneznyKocur/fbchat
+Works only with python 3.8.*
 
 Please Contribute as my code probably sucks :/
 
@@ -13,7 +14,6 @@ import json
 import threading
 import datetime
 import validators
-import string
 import fbchat
 from fbchat.models import Message, ThreadType
 from PIL import Image
@@ -164,7 +164,6 @@ class Wrapper(fbchat.Client):
 
     def utils_isURL(self, input):
         return validators.url(input)
-
     def utils_compressVideo(self, input, output):
         # Reference: https://en.wikipedia.org/wiki/Bit_rate#Encoding_bit_rate
         min_audio_bitrate = 32000
@@ -209,10 +208,8 @@ class Wrapper(fbchat.Client):
                 "b:a": audio_bitrate,
             },
         ).overwrite_output().run()
-
     def utils_threadCount(self) -> int:
-        return threading.activeCount()
-
+        return len(threading.enumerate())
     def utils_getUserName(self, id: int):
         return self.fetchUserInfo(id)[id].name
 
@@ -228,6 +225,7 @@ class Wrapper(fbchat.Client):
         return self.fetchThreadInfo(thread_id)[thread_id].type
 
     def utils_getThreadFromUserIndex(self,id: str) -> tuple:
+        if not id: return
         if id.isnumeric(): 
             thread_type = self.utils_getThreadType(int(id))
             thread_id = id
