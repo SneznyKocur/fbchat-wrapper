@@ -1,6 +1,6 @@
 """
 A simple wrapper for the fbchat library 
-please use only with https://github.com/SneznyKocur/fbchat
+please use only with https://github.com/SneznyKocur/fbchat (pip install py-fbchat)
 Works only with python 3.8.*
 
 Please Contribute as my code probably sucks :/
