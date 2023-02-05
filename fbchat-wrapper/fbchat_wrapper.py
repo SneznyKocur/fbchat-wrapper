@@ -14,8 +14,8 @@ import json
 import threading
 import datetime
 import validators
-import fbchat
-from fbchat.models import Message, ThreadType
+import py_fbchat as fbchat
+from py_fbchat.models import Message, ThreadType
 from PIL import Image
 from PIL import ImageDraw
 
