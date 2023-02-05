@@ -1,8 +1,6 @@
 from setuptools import setup, find_packages
 import os
-with open("requirements.txt") as f:
-    requirements = f.read().split("\n")
-VERSION = '0.0.1'
+VERSION = '0.0.2'
 DESCRIPTION = 'Wrapper for fbchat'
 LONG_DESCRIPTION = 'Simple Wrapper Package to make Programming with fbchat easier and simpler to read.'
 
@@ -16,7 +14,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
-    install_requires=requirements,
+    install_requires=["py-fbchat","validators","pillow","ffmpeg-python","wget","pytube"],
     keywords=['python', 'messaging', 'wrapper'],
     classifiers=[
         "Development Status :: 1 - Planning",

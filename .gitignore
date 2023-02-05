@@ -5,3 +5,6 @@ __pycache__
 *.txt
 *.mp4
 ff*.*
+build
+dist
+*.egg*

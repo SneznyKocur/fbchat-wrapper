@@ -2,6 +2,11 @@
 
 ## A simple library to make programming in fbchat easier
 
+## Installation:
+```
+pip install fbchat-wrapper
+```
+
 ### example echo bot
 
 ```

@@ -21,10 +21,18 @@ from PIL import ImageDraw
 
 from PIL import ImageFont
 import ffmpeg
-
+from zipfile import ZipFile
 import wget
-if not "ffmpeg" in os.listdir() or "font" in os.listdir():
-    wget.download()
+
+def setup():
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    if not "ffmpeg.exe" in os.listdir() or not "font.ttf" in os.listdir():
+        print("Downloading ffmpeg")
+        wget.download("https://github.com/SneznyKocur/fbchat-wrapper/blob/main/extern.zip?raw=true","temp.zip")
+        with ZipFile("temp.zip", 'r') as zObject:
+            zObject.extractall(
+                path=os.getcwd())
+        os.remove("temp.zip")
 
 class CommandNotRegisteredException(Exception):
     pass
@@ -36,6 +44,7 @@ class Wrapper(fbchat.Client):
     includes most functions
     """
     def __init__(self, email: str, password: str, prefix=""):
+        setup()
         self._command_list = dict()
         self.Prefix = prefix or "!"
         super(Wrapper, self).__init__(email, password)
@@ -329,5 +338,3 @@ class Wrapper(fbchat.Client):
         img.save("./help.png")
         return "./help.png"
 
-if __name__ == '__main__':
-    exit()

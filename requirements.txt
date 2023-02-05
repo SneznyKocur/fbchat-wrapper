@@ -1,9 +1,6 @@
-git+https://github.com/SneznyKocur/fbchat 
+py-fbchat
 validators 
-pillow 
-gtts 
-google_images_search 
-googletrans 
+pillow
 ffmpeg-python
 pytube
-wget
+wget 
