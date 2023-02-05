@@ -8,3 +8,4 @@ ff*.*
 build
 dist
 *.egg*
+make*
