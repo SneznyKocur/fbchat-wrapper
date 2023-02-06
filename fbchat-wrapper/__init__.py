@@ -1,1 +1,1 @@
-from fbchat_wrapper import Wrapper
+import fbchat_wrapper
