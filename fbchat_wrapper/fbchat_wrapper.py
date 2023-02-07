@@ -46,8 +46,12 @@ class Wrapper(fbchat.Client):
     def __init__(self, email: str, password: str, prefix=""):
         setup()
         self._command_list = dict()
+        self._event_list = dict()
         self.Prefix = prefix or "!"
         super(Wrapper, self).__init__(email, password)
+
+    def _addEvent(self,name,func):
+        self._event_list.update({f"{name}":func})
 
     def _addCommand(self, name: str, func, args: list, description: str = None):
         self._command_list.update({f"{name}": [func, args, description]})
@@ -61,6 +65,13 @@ class Wrapper(fbchat.Client):
 
         return wrapper
 
+    def Event(self):
+        """
+        Registers an Event
+        """
+        def wrapper(func):
+            self._addEvent(func.__name__, func)
+    
     def _arg_split(self,args):
         inside = False
         end = list()
@@ -98,6 +109,7 @@ class Wrapper(fbchat.Client):
         self.author = self.utils_getUserName(author_id)
 
         if not self.text: return
+        # logging
         with open(os.getcwd() + "/messages.txt", "r") as f:
             lol = json.load(f)
 
@@ -148,6 +160,7 @@ class Wrapper(fbchat.Client):
         t.start()
 
     def onMessageUnsent(self, mid, author_id, thread_id, thread_type, ts, msg):
+        # logging
         if author_id != self.uid:
             with open(os.getcwd() + "/messages.txt", "r") as f:
                 lol = json.load(f)
@@ -155,6 +168,189 @@ class Wrapper(fbchat.Client):
 
             with open(os.getcwd() + "/messages.txt", "w", encoding="utf-8") as f:
                 json.dump(lol, f)
+    def on2FACode(self,**kwargs):
+        if "on2FACode" in self._event_list:
+                self._event_list["on2FACode"](**kwargs)
+
+    def onAdminAdded(self,**kwargs):
+        if "onAdminAdded" in self._event_list:
+                self._event_list["onAdminAdded"](**kwargs)
+
+    def onAdminRemoved(self,**kwargs):
+        if "onAdminRemoved" in self._event_list:
+                self._event_list["onAdminRemoved"](**kwargs)
+
+    def onApprovalModeChange(self,**kwargs):
+        if "onApprovalModeChange" in self._event_list:
+                self._event_list["onApprovalModeChange"](**kwargs)
+
+    def onBlock(self,**kwargs):
+        if "onBlock" in self._event_list:
+                self._event_list["onBlock"](**kwargs)
+
+    def onBuddylistOverlay(self,**kwargs):
+        if "onBuddylistOverlay" in self._event_list:
+                self._event_list["onBuddylistOverlay"](**kwargs)
+
+    def onCallEnded(self,**kwargs):
+        if "onCallEnded" in self._event_list:
+                self._event_list["onCallEnded"](**kwargs)
+
+    def onCallStarted(self,**kwargs):
+        if "onCallStarted" in self._event_list:
+                self._event_list["onCallStarted"](**kwargs)
+
+    def onChatTimestamp(self,**kwargs):
+        if "onChatTimestamp" in self._event_list:
+                self._event_list["onChatTimestamp"](**kwargs)
+
+    def onColorChange(self,**kwargs):
+        if "onColorChange" in self._event_list:
+                self._event_list["onColorChange"](**kwargs)
+
+    def onEmojiChange(self,**kwargs):
+        if "onEmojiChange" in self._event_list:
+                self._event_list["onEmojiChange"](**kwargs)
+
+    def onFriendRequest(self,**kwargs):
+        if "onFriendRequest" in self._event_list:
+                self._event_list["onFriendRequest"](**kwargs)
+
+    def onGamePlayed(self,**kwargs):
+        if "onGamePlayed" in self._event_list:
+                self._event_list["onGamePlayed"](**kwargs)
+
+    def onImageChange(self,**kwargs):
+        if "onImageChange" in self._event_list:
+                self._event_list["onImageChange"](**kwargs)
+
+    def onInbox(self,**kwargs):
+        if "onInbox" in self._event_list:
+                self._event_list["onInbox"](**kwargs)
+
+    def onListenError(self,**kwargs):
+        if "onListenError" in self._event_list:
+                self._event_list["onListenError"](**kwargs)
+
+    def onListening(self,**kwargs):
+        if "onListening" in self._event_list:
+                self._event_list["onListening"](**kwargs)
+
+    def onLiveLocation(self,**kwargs):
+        if "onLiveLocation" in self._event_list:
+                self._event_list["onLiveLocation"](**kwargs)
+
+    def onLoggedIn(self,**kwargs):
+        if "onLoggedIn" in self._event_list:
+                self._event_list["onLoggedIn"](**kwargs)
+
+    def onLoggingIn(self,**kwargs):
+        if "onLoggingIn" in self._event_list:
+                self._event_list["onLoggingIn"](**kwargs)
+
+    def onMarkedSeen(self,**kwargs):
+        if "onMarkedSeen" in self._event_list:
+                self._event_list["onMarkedSeen"](**kwargs)
+
+    def onMessage(self,**kwargs):
+        if "onMessage" in self._event_list:
+                self._event_list["onMessage"](**kwargs)
+
+    def onMessageDelivered(self,**kwargs):
+        if "onMessageDelivered" in self._event_list:
+                self._event_list["onMessageDelivered"](**kwargs)
+
+    def onMessageError(self,**kwargs):
+        if "onMessageError" in self._event_list:
+                self._event_list["onMessageError"](**kwargs)
+
+    def onMessageSeen(self,**kwargs):
+        if "onMessageSeen" in self._event_list:
+                self._event_list["onMessageSeen"](**kwargs)
+
+    def onMessageUnsent(self,**kwargs):
+        if "onMessageUnsent" in self._event_list:
+                self._event_list["onMessageUnsent"](**kwargs)
+
+    def onNicknameChange(self,**kwargs):
+        if "onNicknameChange" in self._event_list:
+                self._event_list["onNicknameChange"](**kwargs)
+
+    def onPendingMessage(self,**kwargs):
+        if "onPendingMessage" in self._event_list:
+                self._event_list["onPendingMessage"](**kwargs)
+
+    def onPeopleAdded(self,**kwargs):
+        if "onPeopleAdded" in self._event_list:
+                self._event_list["onPeopleAdded"](**kwargs)
+
+    def onPersonRemoved(self,**kwargs):
+        if "onPersonRemoved" in self._event_list:
+                self._event_list["onPersonRemoved"](**kwargs)
+
+    def onPlanCreated(self,**kwargs):
+        if "onPlanCreated" in self._event_list:
+                self._event_list["onPlanCreated"](**kwargs)
+
+    def onPlanDeleted(self,**kwargs):
+        if "onPlanDeleted" in self._event_list:
+                self._event_list["onPlanDeleted"](**kwargs)
+
+    def onPlanEdited(self,**kwargs):
+        if "onPlanEdited" in self._event_list:
+                self._event_list["onPlanEdited"](**kwargs)
+
+    def onPlanEnded(self,**kwargs):
+        if "onPlanEnded" in self._event_list:
+                self._event_list["onPlanEnded"](**kwargs)
+
+    def onPlanParticipation(self,**kwargs):
+        if "onPlanParticipation" in self._event_list:
+                self._event_list["onPlanParticipation"](**kwargs)
+
+    def onPollCreated(self,**kwargs):
+        if "onPollCreated" in self._event_list:
+                self._event_list["onPollCreated"](**kwargs)
+
+    def onPollVoted(self,**kwargs):
+        if "onPollVoted" in self._event_list:
+                self._event_list["onPollVoted"](**kwargs)
+
+    def onQprimer(self,**kwargs):
+        if "onQprimer" in self._event_list:
+                self._event_list["onQprimer"](**kwargs)
+
+    def onReactionAdded(self,**kwargs):
+        if "onReactionAdded" in self._event_list:
+                self._event_list["onReactionAdded"](**kwargs)
+
+    def onReactionRemoved(self,**kwargs):
+        if "onReactionRemoved" in self._event_list:
+                self._event_list["onReactionRemoved"](**kwargs)
+
+    def onTitleChange(self,**kwargs):
+        if "onTitleChange" in self._event_list:
+                self._event_list["onTitleChange"](**kwargs)
+
+    def onTyping(self,**kwargs):
+        if "onTyping" in self._event_list:
+                self._event_list["onTyping"](**kwargs)
+
+    def onUnblock(self,**kwargs):
+        if "onUnblock" in self._event_list:
+                self._event_list["onUnblock"](**kwargs)
+
+    def onUnknownMesssageType(self,**kwargs):
+        if "onUnknownMesssageType" in self._event_list:
+                self._event_list["onUnknownMesssageType"](**kwargs)
+
+    def onUserJoinedCall(self,**kwargs):
+        if "onUserJoinedCall" in self._event_list:
+                self._event_list["onUserJoinedCall"](**kwargs)
+
+
+
+
 
     def sendmsg(self, text: str, thread: tuple = None) -> None:
         """
@@ -166,7 +362,6 @@ class Wrapper(fbchat.Client):
             thread = self.thread
         thread_id, thread_type = thread
         self.send(Message(text=text), thread_id=thread_id, thread_type=thread_type)
-
     def reply(self, text: str, thread: tuple = None) -> tuple:
         """
         Replies to last message sent 
@@ -197,6 +392,8 @@ class Wrapper(fbchat.Client):
             self.sendRemoteFiles(filepath,message=message, thread_id=thread_id, thread_type=thread_type)
         else:
             self.sendLocalFiles(filepath, message=message, thread_id=thread_id, thread_type=thread_type)
+
+
 
     def utils_isURL(self, input):
         """
