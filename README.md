@@ -4,7 +4,7 @@
 
 ## Installation:
 ```
-pip install fbchat-wrapper
+pip install fbchat_wrapper
 ```
 
 ### example echo bot
