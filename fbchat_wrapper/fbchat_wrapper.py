@@ -109,25 +109,6 @@ class Wrapper(fbchat.Client):
         self.author = self.utils_getUserName(author_id)
 
         if not self.text: return
-        # logging
-        if not os.path.exists(os.getcwd() + "/messages.txt"):
-            with open(os.getcwd() + "/messages.txt", "w") as f:
-                pass
-        with open(os.getcwd() + "/messages.txt", "r") as f:
-            lol = json.load(f)
-
-            lol["messages"].update(
-                {
-                    message_object.uid: {
-                        message_object.text: self.utils_getUserName(author_id),
-                        "time": datetime.datetime.fromtimestamp(ts // 1000).isoformat(),
-                        "unsent": False,
-                        "Version": f"marian3 beta",
-                    }
-                }
-            )
-        with open(os.getcwd() + "/messages.txt", "w", encoding="utf-8") as f:
-            json.dump(lol, f, indent=1)
 
         if not self.text.startswith(self.Prefix):
             return
@@ -162,15 +143,9 @@ class Wrapper(fbchat.Client):
         )
         t.start()
 
-    def onMessageUnsent(self, mid, author_id, thread_id, thread_type, ts, msg):
-        # logging
-        if author_id != self.uid:
-            with open(os.getcwd() + "/messages.txt", "r") as f:
-                lol = json.load(f)
-                lol["messages"][mid]["UNSENT"] = True
-
-            with open(os.getcwd() + "/messages.txt", "w", encoding="utf-8") as f:
-                json.dump(lol, f)
+    def onMessageUnsent(self, **kwargs):
+        if "onMessageUnsent" in self._event_list:
+            self._event_list["onMessageUnsent"](**kwargs)
     def on2FACode(self,**kwargs):
         if "on2FACode" in self._event_list:
                 self._event_list["on2FACode"](**kwargs)
