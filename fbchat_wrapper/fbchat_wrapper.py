@@ -27,7 +27,7 @@ import wget
 def setup():
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     if not "ffmpeg.exe" in os.listdir() or not "font.ttf" in os.listdir():
-        print("Downloading ffmpeg")
+        print(f"Downloading ffmpeg to {os.getcwd()}")
         wget.download("https://github.com/SneznyKocur/fbchat-wrapper/blob/main/extern.zip?raw=true","temp.zip")
         with ZipFile("temp.zip", 'r') as zObject:
             zObject.extractall(
@@ -110,6 +110,9 @@ class Wrapper(fbchat.Client):
 
         if not self.text: return
         # logging
+        if not os.path.exists(os.getcwd() + "/messages.txt"):
+            with open(os.getcwd() + "/messages.txt", "w") as f:
+                pass
         with open(os.getcwd() + "/messages.txt", "r") as f:
             lol = json.load(f)
 
