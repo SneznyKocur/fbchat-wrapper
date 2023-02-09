@@ -70,6 +70,7 @@ class Wrapper(fbchat.Client):
         """
         def wrapper(func):
             self._addEvent(func.__name__, func)
+        return wrapper
     
     def _arg_split(self,args):
         inside = False
@@ -112,7 +113,8 @@ class Wrapper(fbchat.Client):
         if not self.text.startswith(self.Prefix):
             if "onMessage" in self._event_list:
                 self._event_list["onMessage"](author_id=author_id,message_object=message_object,thread_id=thread_id,thread_type=thread_type,ts=ts,**kwargs)
-
+            else:
+                return
         commandName = self.text.replace(self.Prefix, "", 1).split(" ")[0]
         args = list()
         _args = self.text.replace(self.Prefix, "", 1).replace(commandName, "", 1)
