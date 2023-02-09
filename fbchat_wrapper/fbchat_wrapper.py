@@ -10,9 +10,7 @@ Made with <3 by: SneznyKocur
 
 
 import os
-import json
 import threading
-import datetime
 import validators
 import py_fbchat as fbchat
 from py_fbchat.models import Message, ThreadType
@@ -48,7 +46,8 @@ class Wrapper(fbchat.Client):
         self._command_list = dict()
         self._event_list = dict()
         self.Prefix = prefix or "!"
-        super(Wrapper, self).__init__(email, password)
+        print("logging in")
+        super().__init__(email, password)
 
     def _addEvent(self,name,func):
         self._event_list.update({f"{name}":func})
@@ -111,7 +110,8 @@ class Wrapper(fbchat.Client):
         if not self.text: return
 
         if not self.text.startswith(self.Prefix):
-            return
+            if "onMessage" in self._event_list:
+                self._event_list["onMessage"](author_id=author_id,message_object=message_object,thread_id=thread_id,thread_type=thread_type,ts=ts,**kwargs)
 
         commandName = self.text.replace(self.Prefix, "", 1).split(" ")[0]
         args = list()
@@ -146,6 +146,7 @@ class Wrapper(fbchat.Client):
     def onMessageUnsent(self, **kwargs):
         if "onMessageUnsent" in self._event_list:
             self._event_list["onMessageUnsent"](**kwargs)
+            
     def on2FACode(self,**kwargs):
         if "on2FACode" in self._event_list:
                 self._event_list["on2FACode"](**kwargs)
@@ -206,13 +207,6 @@ class Wrapper(fbchat.Client):
         if "onInbox" in self._event_list:
                 self._event_list["onInbox"](**kwargs)
 
-    def onListenError(self,**kwargs):
-        if "onListenError" in self._event_list:
-                self._event_list["onListenError"](**kwargs)
-
-    def onListening(self,**kwargs):
-        if "onListening" in self._event_list:
-                self._event_list["onListening"](**kwargs)
 
     def onLiveLocation(self,**kwargs):
         if "onLiveLocation" in self._event_list:
@@ -230,9 +224,6 @@ class Wrapper(fbchat.Client):
         if "onMarkedSeen" in self._event_list:
                 self._event_list["onMarkedSeen"](**kwargs)
 
-    def onMessage(self,**kwargs):
-        if "onMessage" in self._event_list:
-                self._event_list["onMessage"](**kwargs)
 
     def onMessageDelivered(self,**kwargs):
         if "onMessageDelivered" in self._event_list:
