@@ -554,8 +554,11 @@ class Wrapper(fbchat.Client):
         name = userindex.split("[")[0]
         ids = self.utils_searchForUsers(name)
         return ids[int(userindex.split("[")[1].replace("]",""))]
-    def utils_genHelpImg(self) -> str:
-        """Generates a png of all help commands
+    def utils_genHelpImg(self,footer:str = None) -> str:
+        """Generates help image from commands
+
+        Args:
+            footer (str, optional): _image footer. Defaults to None.
 
         Returns:
             str: file path
@@ -592,7 +595,7 @@ class Wrapper(fbchat.Client):
                 font,
             )
 
-        I1.text((0, 290), "marian3 v1.0.0, made with <3 by SneznyKocur", (190, 255, 190), font)
+        I1.text((0, 290), footer, (190, 255, 190), font)
         img.save("./help.png")
-        return "./help.png"
+        return os.path.abspath("./help.png")
 
