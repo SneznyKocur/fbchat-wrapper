@@ -111,7 +111,7 @@ class Wrapper(fbchat.Client):
             print("Failed to mark as read")
         self.thread = (thread_id, thread_type)
         self.text = message_object.text
-        self.author = self.utils_getUserName(author_id)
+        self.author = self.utils.getUserName(author_id)
 
         if not self.text: return
 
@@ -418,184 +418,184 @@ class Wrapper(fbchat.Client):
         else:
             self.sendLocalFiles(filepath, message=message, thread_id=thread_id, thread_type=thread_type)
 
+    class utils:
+        def isURL(self, input):
+            """Check if input is url
 
+            Args:
+                input (str): input
 
-    def utils_isURL(self, input):
-        """Check if input is url
+            Returns:
+                bool: is url?
+            """
+            return validators.url(input)
+        def compressVideo(self, input, output):
+            """Compresses video to be sendable with messenger
 
-        Args:
-            input (str): input
+            Args:
+                input (str): input video file path
+                output (str): output video file path
+            """
+            # Reference: https://en.wikipedia.org/wiki/Bit_rate#Encoding_bit_rate
+            min_audio_bitrate = 32000
+            max_audio_bitrate = 256000
 
-        Returns:
-            bool: is url?
-        """
-        return validators.url(input)
-    def utils_compressVideo(self, input, output):
-        """Compresses video to be sendable with messenger
+            probe = ffmpeg.probe(input)
+            # Video duration, in s.
+            duration = float(probe["format"]["duration"])
+            # Audio bitrate, in bps.
+            audio_bitrate = float(
+                next((s for s in probe["streams"] if s["codec_type"] == "audio"), None)[
+                    "bit_rate"
+                ]
+            )
+            # Target total bitrate, in bps.
+            target_total_bitrate = (50000 * 1024 * 8) / (1.073741824 * duration)
 
-        Args:
-            input (str): input video file path
-            output (str): output video file path
-        """
-        # Reference: https://en.wikipedia.org/wiki/Bit_rate#Encoding_bit_rate
-        min_audio_bitrate = 32000
-        max_audio_bitrate = 256000
+            # Target audio bitrate, in bps
+            if 10 * audio_bitrate > target_total_bitrate:
+                audio_bitrate = target_total_bitrate / 10
+                if audio_bitrate < min_audio_bitrate < target_total_bitrate:
+                    audio_bitrate = min_audio_bitrate
+                elif audio_bitrate > max_audio_bitrate:
+                    audio_bitrate = max_audio_bitrate
+            # Target video bitrate, in bps.
+            video_bitrate = target_total_bitrate - audio_bitrate
 
-        probe = ffmpeg.probe(input)
-        # Video duration, in s.
-        duration = float(probe["format"]["duration"])
-        # Audio bitrate, in bps.
-        audio_bitrate = float(
-            next((s for s in probe["streams"] if s["codec_type"] == "audio"), None)[
-                "bit_rate"
-            ]
-        )
-        # Target total bitrate, in bps.
-        target_total_bitrate = (50000 * 1024 * 8) / (1.073741824 * duration)
+            i = ffmpeg.input(input)
+            ffmpeg.output(
+                i,
+                os.devnull,
+                **{"c:v": "libx264", "b:v": video_bitrate, "pass": 1, "f": "mp4"},
+            ).overwrite_output().run()
+            ffmpeg.output(
+                i,
+                output,
+                **{
+                    "c:v": "libx264",
+                    "b:v": video_bitrate,
+                    "pass": 2,
+                    "c:a": "aac",
+                    "b:a": audio_bitrate,
+                },
+            ).overwrite_output().run()
+        def threadCount(self) -> int:
+            """get current alive thread count
 
-        # Target audio bitrate, in bps
-        if 10 * audio_bitrate > target_total_bitrate:
-            audio_bitrate = target_total_bitrate / 10
-            if audio_bitrate < min_audio_bitrate < target_total_bitrate:
-                audio_bitrate = min_audio_bitrate
-            elif audio_bitrate > max_audio_bitrate:
-                audio_bitrate = max_audio_bitrate
-        # Target video bitrate, in bps.
-        video_bitrate = target_total_bitrate - audio_bitrate
+            Returns:
+                int: current alive thread count
+            """
+            return len(threading.enumerate())
+        def genHelpImg(self,footer:str = None) -> str:
+            """Generates help image from commands
 
-        i = ffmpeg.input(input)
-        ffmpeg.output(
-            i,
-            os.devnull,
-            **{"c:v": "libx264", "b:v": video_bitrate, "pass": 1, "f": "mp4"},
-        ).overwrite_output().run()
-        ffmpeg.output(
-            i,
-            output,
-            **{
-                "c:v": "libx264",
-                "b:v": video_bitrate,
-                "pass": 2,
-                "c:a": "aac",
-                "b:a": audio_bitrate,
-            },
-        ).overwrite_output().run()
-    def utils_threadCount(self) -> int:
-        """get current alive thread count
+            Args:
+                footer (str, optional): _image footer. Defaults to None.
 
-        Returns:
-            int: current alive thread count
-        """
-        return len(threading.enumerate())
-    def utils_getUserName(self, id: int):
-        """Gets the username of user @ id
-
-        Args:
-            id (int): id of user
-        Returns:
-            str: username
-        """
-        return self.fetchUserInfo(id)[id].name
-
-    def utils_searchForUsers(self,query: str) -> list:
-        """Searches for users
-
-        Args:
-            query (str): query to search for
-
-        Returns:
-            list: list of user ids
-        """
-        _ = []
-        for user in self.searchForUsers(query):
-            _.append(user.uid)
-        return _
-    def utils_getThreadType(self,thread_id: int) -> ThreadType:
-        """Gets threadtype of a thread @ thread_id
-
-        Args:
-            thread_id (int): the id
-
-        Returns:
-            ThreadType: type of thread
-        """
-        return self.fetchThreadInfo(thread_id)[thread_id].type
-
-    def utils_getThreadFromUserIndex(self,userindex: str) -> tuple:
-        """Fetches thread from user @ userindex
-
-        Args:
-            userindex (str): username[index]
-
-        Returns:
-            tuple: thread tuple
-        """
-        if not userindex: return
-        if userindex.isnumeric(): 
-            thread_type = self.utils_getThreadType(int(userindex))
-            thread_id = userindex
-            thread = (thread_id,thread_type)
-        else:
-            name = userindex.split("[")[0]
-            ids = self.utils_searchForUsers(name)
-            thread_id = ids[int(userindex.split("[")[1].replace("]",""))]
-            thread_type = self.utils_getThreadType(int(thread_id)) 
-            thread = (thread_id,thread_type)
-        return thread
-    def utils_getIDFromUserIndex(self, userindex:str) -> int:
-        """Fetches id of user @ userindex
-
-        Args:
-            userindex (str): username[index]
-
-        Returns:
-            int: user.uid
-        """
-        name = userindex.split("[")[0]
-        ids = self.utils_searchForUsers(name)
-        return ids[int(userindex.split("[")[1].replace("]",""))]
-    def utils_genHelpImg(self,footer:str = None) -> str:
-        """Generates help image from commands
-
-        Args:
-            footer (str, optional): _image footer. Defaults to None.
-
-        Returns:
-            str: file path
-        """
-        helpdict = dict()
-        for x in self._command_list:
-            helpdict.update(
-                {
-                    x: {
-                        "description": self._command_list[x][2],
-                        "args": self._command_list[x][1],
+            Returns:
+                str: file path
+            """
+            helpdict = dict()
+            for x in self._command_list:
+                helpdict.update(
+                    {
+                        x: {
+                            "description": self._command_list[x][2],
+                            "args": self@Wrapper._command_list[x][1],
+                        }
                     }
-                }
-            )
-        # desciption = 2
-        # args = 1
-        # func = 0
+                )
+            # desciption = 2
+            # args = 1
+            # func = 0
 
-        img = Image.new("RGBA", (300, 300), color=(20, 20, 20))
-        I1 = ImageDraw.Draw(img)
-        font = ImageFont.truetype("./font.ttf")
+            img = Image.new("RGBA", (300, 300), color=(20, 20, 20))
+            I1 = ImageDraw.Draw(img)
+            font = ImageFont.truetype("./font.ttf")
 
-        for i, name in enumerate(helpdict):
+            for i, name in enumerate(helpdict):
 
-            I1.text((0, (i + 1) * 10), name, (255, 255, 255), font) # name
+                I1.text((0, (i + 1) * 10), name, (255, 255, 255), font) # name
+            
+                for y, x in enumerate(helpdict[name]["args"]):
+                    I1.text(((5+7*y) * 10, (i + 1) * 10), x, (255, 255, 0), font) # args
+
+                I1.text(
+                    (4 * 20 + 100, (i + 1) * 10),
+                    helpdict[name]["description"],
+                    (255, 255, 255),
+                    font,
+                )
+
+            I1.text((0, 290), footer, (190, 255, 190), font)
+            img.save("./help.png")
+            return os.path.abspath("./help.png")
+
+        def searchForUsers(self,query: str) -> list:
+            """Searches for users
+
+            Args:
+                query (str): query to search for
+
+            Returns:
+                list: list of user ids
+            """
+            _ = []
+            for user in self@Wrapper.searchForUsers(query):
+                _.append(user.uid)
+            return _
+
+        def getIDFromUserIndex(self, userindex:str) -> int:
+            """Fetches id of user @ userindex
+
+            Args:
+                userindex (str): username[index]
+
+            Returns:
+                int: user.uid
+            """
+            name = userindex.split("[")[0]
+            ids = self.searchForUsers(name)
+            return ids[int(userindex.split("[")[1].replace("]",""))]
         
-            for y, x in enumerate(helpdict[name]["args"]):
-                I1.text(((5+7*y) * 10, (i + 1) * 10), x, (255, 255, 0), font) # args
+        def getUserName(self, id: int):
+            """Gets the username of user @ id
 
-            I1.text(
-                (4 * 20 + 100, (i + 1) * 10),
-                helpdict[name]["description"],
-                (255, 255, 255),
-                font,
-            )
+            Args:
+                id (int): id of user
+            Returns:
+                str: username
+            """
+            return self@Wrapper.fetchUserInfo(id)[id].name
+        
+        def getThreadType(self,thread_id: int) -> ThreadType:
+            """Gets threadtype of a thread @ thread_id
 
-        I1.text((0, 290), footer, (190, 255, 190), font)
-        img.save("./help.png")
-        return os.path.abspath("./help.png")
+            Args:
+                thread_id (int): the id
 
+            Returns:
+                ThreadType: type of thread
+            """
+            return self@Wrapper.fetchThreadInfo(thread_id)[thread_id].type
+        def getThreadFromUserIndex(self,userindex: str) -> tuple:
+            """Fetches thread from user @ userindex
+
+            Args:
+                userindex (str): username[index]
+
+            Returns:
+                tuple: thread tuple
+            """
+            if not userindex: return
+            if userindex.isnumeric(): 
+                thread_type = self.getThreadType(int(userindex))
+                thread_id = userindex
+                thread = (thread_id,thread_type)
+            else:
+                name = userindex.split("[")[0]
+                ids = self.searchForUsers(name)
+                thread_id = ids[int(userindex.split("[")[1].replace("]",""))]
+                thread_type = self.getThreadType(int(thread_id)) 
+                thread = (thread_id,thread_type)
+            return thread
