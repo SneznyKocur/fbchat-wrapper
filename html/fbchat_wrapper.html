@@ -1,0 +1,2546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>fbchat_wrapper API documentation</title>
+<meta name="description" content="A simple wrapper for the fbchat library
+please use only with https://github.com/SneznyKocur/fbchat (pip install py-fbchat)
+Works only with python …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fbchat_wrapper</code></h1>
+</header>
+<section id="section-intro">
+<p>A simple wrapper for the fbchat library
+please use only with <a href="https://github.com/SneznyKocur/fbchat">https://github.com/SneznyKocur/fbchat</a> (pip install py-fbchat)
+Works only with python 3.8.*</p>
+<p>Please Contribute as my code probably sucks :/</p>
+<p>Made with &lt;3 by: SneznyKocur</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+A simple wrapper for the fbchat library 
+please use only with https://github.com/SneznyKocur/fbchat (pip install py-fbchat)
+Works only with python 3.8.*
+
+Please Contribute as my code probably sucks :/
+
+Made with &lt;3 by: SneznyKocur
+&#34;&#34;&#34;
+
+
+import os
+import threading
+import validators
+import py_fbchat as fbchat
+from py_fbchat.models import Message, ThreadType
+from PIL import Image
+from PIL import ImageDraw
+
+from PIL import ImageFont
+import ffmpeg
+from zipfile import ZipFile
+import wget
+
+def _setup():
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    if not &#34;ffmpeg.exe&#34; in os.listdir() or not &#34;font.ttf&#34; in os.listdir():
+        print(f&#34;Downloading ffmpeg to {os.getcwd()}&#34;)
+        wget.download(&#34;https://github.com/SneznyKocur/fbchat-wrapper/blob/main/extern.zip?raw=true&#34;,&#34;temp.zip&#34;)
+        with ZipFile(&#34;temp.zip&#34;, &#39;r&#39;) as zObject:
+            zObject.extractall(
+                path=os.getcwd())
+        os.remove(&#34;temp.zip&#34;)
+
+class CommandNotRegisteredException(Exception):
+    pass
+
+
+class Wrapper(fbchat.Client):
+    &#34;&#34;&#34;
+    Main Wrapper Class
+    includes most functions
+    &#34;&#34;&#34;
+    def __init__(self, email: str, password: str, prefix=&#34;&#34;):
+        
+        _setup()
+        self._command_list = dict()
+        self._event_list = dict()
+        self.Prefix = prefix or &#34;!&#34;
+        print(&#34;logging in&#34;)
+        super().__init__(email, password)
+
+    def _addEvent(self,name,func):
+        self._event_list.update({f&#34;{name}&#34;:func})
+
+    def _addCommand(self, name: str, func, args: list, description: str = None):
+        self._command_list.update({f&#34;{name}&#34;: [func, args, description]})
+
+    def Command(self, name: str, args: list, description: str = None):
+        &#34;&#34;&#34;Register a Command
+
+        Args:
+            name (str): name of the command
+            args (list): list of arguments the command needs [str,str]
+            description (str, optional): description of the command. Defaults to None.
+        &#34;&#34;&#34;
+        def wrapper(func):
+            self._addCommand(name, func, args, description)
+
+        return wrapper
+
+    def Event(self):
+        &#34;&#34;&#34;Register an Event
+        &#34;&#34;&#34;
+        def wrapper(func):
+            self._addEvent(func.__name__, func)
+        return wrapper
+    
+    def _arg_split(self,args):
+        inside = False
+        end = list()
+        part = &#34;&#34;
+        for char in args:
+            if char == &#39;&#34;&#39;:
+                inside = not inside
+                if not inside:
+                    end.append(part)
+            elif char == &#34; &#34;:
+                if inside:
+                    part+=char
+                else:
+                    end.append(part)
+                    part = &#34;&#34;
+            else:
+                part+=char
+        end.append(part)
+        return list(dict.fromkeys(end[1:]))
+
+    def onMessage(
+        self, author_id, message_object, thread_id, thread_type, ts, **kwargs
+    ):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        print(&#34;got message&#34;)
+        if message_object.author == self.uid:
+            return
+        self.mid = message_object.uid
+        try:
+            self.markAsDelivered(thread_id, message_object.uid)
+            self.markAsRead(thread_id)
+        except:
+            print(&#34;Failed to mark as read&#34;)
+        self.thread = (thread_id, thread_type)
+        self.text = message_object.text
+        self.author = self.utils_getUserName(author_id)
+
+        if not self.text: return
+
+        if not self.text.startswith(self.Prefix):
+            if &#34;onMessage&#34; in self._event_list:
+                self._event_list[&#34;onMessage&#34;](author_id=author_id,message_object=message_object,thread_id=thread_id,thread_type=thread_type,ts=ts,**kwargs)
+            return
+        commandName = self.text.replace(self.Prefix, &#34;&#34;, 1).split(&#34; &#34;)[0]
+        args = list()
+        _args = self.text.replace(self.Prefix, &#34;&#34;, 1).replace(commandName, &#34;&#34;, 1)
+        parts = self._arg_split(_args)
+        for part in parts:
+            args.append(part)
+
+        if not commandName in self._command_list:
+            self.reply(f&#34;{commandName} is an invalid command&#34;)
+            raise CommandNotRegisteredException
+
+        command = self._command_list[commandName][0]
+        # argument separation
+        argsdict = dict()
+        for i, x in enumerate(self._command_list[commandName][1]):
+            argsdict.update({x: args[i]})
+        print(f&#34;calling command {command} in {self.thread[0]}&#34;)
+        t = threading.Thread(
+            target=command,
+            kwargs={
+                &#34;text&#34;: self.text,
+                &#34;args&#34;: argsdict,
+                &#34;thread&#34;: self.thread,
+                &#34;author&#34;: self.author,
+                &#34;message&#34;: message_object,
+                &#34;ts&#34;: ts
+            },
+        )
+        t.start()
+
+    def onMessageUnsent(self, **kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMessageUnsent&#34; in self._event_list:
+            self._event_list[&#34;onMessageUnsent&#34;](**kwargs)
+            
+    def on2FACode(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;on2FACode&#34; in self._event_list:
+                self._event_list[&#34;on2FACode&#34;](**kwargs)
+
+    def onAdminAdded(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onAdminAdded&#34; in self._event_list:
+                self._event_list[&#34;onAdminAdded&#34;](**kwargs)
+
+    def onAdminRemoved(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onAdminRemoved&#34; in self._event_list:
+                self._event_list[&#34;onAdminRemoved&#34;](**kwargs)
+
+    def onApprovalModeChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onApprovalModeChange&#34; in self._event_list:
+                self._event_list[&#34;onApprovalModeChange&#34;](**kwargs)
+
+    def onBlock(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onBlock&#34; in self._event_list:
+                self._event_list[&#34;onBlock&#34;](**kwargs)
+
+    def onBuddylistOverlay(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onBuddylistOverlay&#34; in self._event_list:
+                self._event_list[&#34;onBuddylistOverlay&#34;](**kwargs)
+
+    def onCallEnded(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onCallEnded&#34; in self._event_list:
+                self._event_list[&#34;onCallEnded&#34;](**kwargs)
+
+    def onCallStarted(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onCallStarted&#34; in self._event_list:
+                self._event_list[&#34;onCallStarted&#34;](**kwargs)
+
+    def onChatTimestamp(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onChatTimestamp&#34; in self._event_list:
+                self._event_list[&#34;onChatTimestamp&#34;](**kwargs)
+
+    def onColorChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onColorChange&#34; in self._event_list:
+                self._event_list[&#34;onColorChange&#34;](**kwargs)
+
+    def onEmojiChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onEmojiChange&#34; in self._event_list:
+                self._event_list[&#34;onEmojiChange&#34;](**kwargs)
+
+    def onFriendRequest(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onFriendRequest&#34; in self._event_list:
+                self._event_list[&#34;onFriendRequest&#34;](**kwargs)
+
+    def onGamePlayed(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onGamePlayed&#34; in self._event_list:
+                self._event_list[&#34;onGamePlayed&#34;](**kwargs)
+
+    def onImageChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onImageChange&#34; in self._event_list:
+                self._event_list[&#34;onImageChange&#34;](**kwargs)
+
+    def onInbox(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onInbox&#34; in self._event_list:
+                self._event_list[&#34;onInbox&#34;](**kwargs)
+
+
+    def onLiveLocation(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onLiveLocation&#34; in self._event_list:
+                self._event_list[&#34;onLiveLocation&#34;](**kwargs)
+
+    def onLoggedIn(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onLoggedIn&#34; in self._event_list:
+                self._event_list[&#34;onLoggedIn&#34;](**kwargs)
+            
+
+    def onLoggingIn(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onLoggingIn&#34; in self._event_list:
+                self._event_list[&#34;onLoggingIn&#34;](**kwargs)
+
+    def onMarkedSeen(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMarkedSeen&#34; in self._event_list:
+                self._event_list[&#34;onMarkedSeen&#34;](**kwargs)
+
+
+    def onMessageDelivered(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMessageDelivered&#34; in self._event_list:
+                self._event_list[&#34;onMessageDelivered&#34;](**kwargs)
+
+    def onMessageError(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMessageError&#34; in self._event_list:
+                self._event_list[&#34;onMessageError&#34;](**kwargs)
+
+    def onMessageSeen(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMessageSeen&#34; in self._event_list:
+                self._event_list[&#34;onMessageSeen&#34;](**kwargs)
+
+    def onMessageUnsent(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMessageUnsent&#34; in self._event_list:
+                self._event_list[&#34;onMessageUnsent&#34;](**kwargs)
+
+    def onNicknameChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onNicknameChange&#34; in self._event_list:
+                self._event_list[&#34;onNicknameChange&#34;](**kwargs)
+
+    def onPendingMessage(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPendingMessage&#34; in self._event_list:
+                self._event_list[&#34;onPendingMessage&#34;](**kwargs)
+
+    def onPeopleAdded(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPeopleAdded&#34; in self._event_list:
+                self._event_list[&#34;onPeopleAdded&#34;](**kwargs)
+
+    def onPersonRemoved(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPersonRemoved&#34; in self._event_list:
+                self._event_list[&#34;onPersonRemoved&#34;](**kwargs)
+
+    def onPlanCreated(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPlanCreated&#34; in self._event_list:
+                self._event_list[&#34;onPlanCreated&#34;](**kwargs)
+
+    def onPlanDeleted(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPlanDeleted&#34; in self._event_list:
+                self._event_list[&#34;onPlanDeleted&#34;](**kwargs)
+
+    def onPlanEdited(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPlanEdited&#34; in self._event_list:
+                self._event_list[&#34;onPlanEdited&#34;](**kwargs)
+
+    def onPlanEnded(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPlanEnded&#34; in self._event_list:
+                self._event_list[&#34;onPlanEnded&#34;](**kwargs)
+
+    def onPlanParticipation(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPlanParticipation&#34; in self._event_list:
+                self._event_list[&#34;onPlanParticipation&#34;](**kwargs)
+
+    def onPollCreated(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPollCreated&#34; in self._event_list:
+                self._event_list[&#34;onPollCreated&#34;](**kwargs)
+
+    def onPollVoted(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPollVoted&#34; in self._event_list:
+                self._event_list[&#34;onPollVoted&#34;](**kwargs)
+
+    def onQprimer(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onQprimer&#34; in self._event_list:
+                self._event_list[&#34;onQprimer&#34;](**kwargs)
+
+    def onReactionAdded(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onReactionAdded&#34; in self._event_list:
+                self._event_list[&#34;onReactionAdded&#34;](**kwargs)
+
+    def onReactionRemoved(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onReactionRemoved&#34; in self._event_list:
+                self._event_list[&#34;onReactionRemoved&#34;](**kwargs)
+
+    def onTitleChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onTitleChange&#34; in self._event_list:
+                self._event_list[&#34;onTitleChange&#34;](**kwargs)
+
+    def onTyping(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onTyping&#34; in self._event_list:
+                self._event_list[&#34;onTyping&#34;](**kwargs)
+
+    def onUnblock(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onUnblock&#34; in self._event_list:
+                self._event_list[&#34;onUnblock&#34;](**kwargs)
+
+    def onUnknownMesssageType(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onUnknownMesssageType&#34; in self._event_list:
+                self._event_list[&#34;onUnknownMesssageType&#34;](**kwargs)
+
+    def onUserJoinedCall(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onUserJoinedCall&#34; in self._event_list:
+                self._event_list[&#34;onUserJoinedCall&#34;](**kwargs)
+
+
+
+
+
+    def sendmsg(self, text: str, thread: tuple = None) -&gt; None:
+        &#34;&#34;&#34;Sends a Message
+
+        Args:
+            text (str): message content
+            thread (tuple, optional): thread tuple. Defaults to None.
+        &#34;&#34;&#34;
+        if thread is None:
+            thread = self.thread
+        thread_id, thread_type = thread
+        self.send(Message(text=text), thread_id=thread_id, thread_type=thread_type)
+    def reply(self, text: str, thread: tuple = None) -&gt; tuple:
+        &#34;&#34;&#34;replies to a message
+
+        Args:
+            text (str): Message Content
+            thread (tuple, optional): thread tuple. Defaults to None.
+
+        Returns:
+            tuple: thread tuple
+        &#34;&#34;&#34;
+        if thread is None:
+            thread = self.thread
+        thread_id, thread_type = thread
+        self.send(
+            fbchat.Message(text=text, reply_to_id=self.mid),
+            thread_id=thread_id,
+            thread_type=thread_type,
+        )
+        return thread
+    def sendFile(self, filepath, message: str = None, thread=None) -&gt; tuple:
+        &#34;&#34;&#34;Sends file
+
+        Args:
+            filepath (_type_): path or link to the file
+            message (str, optional): message to send with the file. Defaults to None.
+            thread (_type_, optional): thread tuple. Defaults to None.
+
+        &#34;&#34;&#34;
+        if thread is None:
+            thread = self.thread
+        thread_id, thread_type = thread
+        if validators.url(filepath):
+            self.sendRemoteFiles(filepath,message=message, thread_id=thread_id, thread_type=thread_type)
+        else:
+            self.sendLocalFiles(filepath, message=message, thread_id=thread_id, thread_type=thread_type)
+
+
+
+    def utils_isURL(self, input):
+        &#34;&#34;&#34;Check if input is url
+
+        Args:
+            input (str): input
+
+        Returns:
+            bool: is url?
+        &#34;&#34;&#34;
+        return validators.url(input)
+    def utils_compressVideo(self, input, output):
+        &#34;&#34;&#34;Compresses video to be sendable with messenger
+
+        Args:
+            input (str): input video file path
+            output (str): output video file path
+        &#34;&#34;&#34;
+        # Reference: https://en.wikipedia.org/wiki/Bit_rate#Encoding_bit_rate
+        min_audio_bitrate = 32000
+        max_audio_bitrate = 256000
+
+        probe = ffmpeg.probe(input)
+        # Video duration, in s.
+        duration = float(probe[&#34;format&#34;][&#34;duration&#34;])
+        # Audio bitrate, in bps.
+        audio_bitrate = float(
+            next((s for s in probe[&#34;streams&#34;] if s[&#34;codec_type&#34;] == &#34;audio&#34;), None)[
+                &#34;bit_rate&#34;
+            ]
+        )
+        # Target total bitrate, in bps.
+        target_total_bitrate = (50000 * 1024 * 8) / (1.073741824 * duration)
+
+        # Target audio bitrate, in bps
+        if 10 * audio_bitrate &gt; target_total_bitrate:
+            audio_bitrate = target_total_bitrate / 10
+            if audio_bitrate &lt; min_audio_bitrate &lt; target_total_bitrate:
+                audio_bitrate = min_audio_bitrate
+            elif audio_bitrate &gt; max_audio_bitrate:
+                audio_bitrate = max_audio_bitrate
+        # Target video bitrate, in bps.
+        video_bitrate = target_total_bitrate - audio_bitrate
+
+        i = ffmpeg.input(input)
+        ffmpeg.output(
+            i,
+            os.devnull,
+            **{&#34;c:v&#34;: &#34;libx264&#34;, &#34;b:v&#34;: video_bitrate, &#34;pass&#34;: 1, &#34;f&#34;: &#34;mp4&#34;},
+        ).overwrite_output().run()
+        ffmpeg.output(
+            i,
+            output,
+            **{
+                &#34;c:v&#34;: &#34;libx264&#34;,
+                &#34;b:v&#34;: video_bitrate,
+                &#34;pass&#34;: 2,
+                &#34;c:a&#34;: &#34;aac&#34;,
+                &#34;b:a&#34;: audio_bitrate,
+            },
+        ).overwrite_output().run()
+    def utils_threadCount(self) -&gt; int:
+        &#34;&#34;&#34;get current alive thread count
+
+        Returns:
+            int: current alive thread count
+        &#34;&#34;&#34;
+        return len(threading.enumerate())
+    def utils_getUserName(self, id: int):
+        &#34;&#34;&#34;Gets the username of user @ id
+
+        Args:
+            id (int): id of user
+        Returns:
+            str: username
+        &#34;&#34;&#34;
+        return self.fetchUserInfo(id)[id].name
+
+    def utils_searchForUsers(self,query: str) -&gt; list:
+        &#34;&#34;&#34;Searches for users
+
+        Args:
+            query (str): query to search for
+
+        Returns:
+            list: list of user ids
+        &#34;&#34;&#34;
+        _ = []
+        for user in self.searchForUsers(query):
+            _.append(user.uid)
+        return _
+    def utils_getThreadType(self,thread_id: int) -&gt; ThreadType:
+        &#34;&#34;&#34;Gets threadtype of a thread @ thread_id
+
+        Args:
+            thread_id (int): the id
+
+        Returns:
+            ThreadType: type of thread
+        &#34;&#34;&#34;
+        return self.fetchThreadInfo(thread_id)[thread_id].type
+
+    def utils_getThreadFromUserIndex(self,userindex: str) -&gt; tuple:
+        &#34;&#34;&#34;Fetches thread from user @ userindex
+
+        Args:
+            userindex (str): username[index]
+
+        Returns:
+            tuple: thread tuple
+        &#34;&#34;&#34;
+        if not userindex: return
+        if userindex.isnumeric(): 
+            thread_type = self.utils_getThreadType(int(userindex))
+            thread_id = userindex
+            thread = (thread_id,thread_type)
+        else:
+            name = userindex.split(&#34;[&#34;)[0]
+            ids = self.utils_searchForUsers(name)
+            thread_id = ids[int(userindex.split(&#34;[&#34;)[1].replace(&#34;]&#34;,&#34;&#34;))]
+            thread_type = self.utils_getThreadType(int(thread_id)) 
+            thread = (thread_id,thread_type)
+        return thread
+    def utils_getIDFromUserIndex(self, userindex:str) -&gt; int:
+        &#34;&#34;&#34;Fetches id of user @ userindex
+
+        Args:
+            userindex (str): username[index]
+
+        Returns:
+            int: user.uid
+        &#34;&#34;&#34;
+        name = userindex.split(&#34;[&#34;)[0]
+        ids = self.utils_searchForUsers(name)
+        return ids[int(userindex.split(&#34;[&#34;)[1].replace(&#34;]&#34;,&#34;&#34;))]
+    def utils_genHelpImg(self) -&gt; str:
+        &#34;&#34;&#34;Generates a png of all help commands
+
+        Returns:
+            str: file path
+        &#34;&#34;&#34;
+        helpdict = dict()
+        for x in self._command_list:
+            helpdict.update(
+                {
+                    x: {
+                        &#34;description&#34;: self._command_list[x][2],
+                        &#34;args&#34;: self._command_list[x][1],
+                    }
+                }
+            )
+        # desciption = 2
+        # args = 1
+        # func = 0
+
+        img = Image.new(&#34;RGBA&#34;, (300, 300), color=(20, 20, 20))
+        I1 = ImageDraw.Draw(img)
+        font = ImageFont.truetype(&#34;./font.ttf&#34;)
+
+        for i, name in enumerate(helpdict):
+
+            I1.text((0, (i + 1) * 10), name, (255, 255, 255), font) # name
+        
+            for y, x in enumerate(helpdict[name][&#34;args&#34;]):
+                I1.text(((5+7*y) * 10, (i + 1) * 10), x, (255, 255, 0), font) # args
+
+            I1.text(
+                (4 * 20 + 100, (i + 1) * 10),
+                helpdict[name][&#34;description&#34;],
+                (255, 255, 255),
+                font,
+            )
+
+        I1.text((0, 290), &#34;marian3 v1.0.0, made with &lt;3 by SneznyKocur&#34;, (190, 255, 190), font)
+        img.save(&#34;./help.png&#34;)
+        return &#34;./help.png&#34;</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="fbchat_wrapper.CommandNotRegisteredException"><code class="flex name class">
+<span>class <span class="ident">CommandNotRegisteredException</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Common base class for all non-exit exceptions.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CommandNotRegisteredException(Exception):
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="fbchat_wrapper.Wrapper"><code class="flex name class">
+<span>class <span class="ident">Wrapper</span></span>
+<span>(</span><span>email: str, password: str, prefix='')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Main Wrapper Class
+includes most functions</p>
+<p>Initialize and log in the client.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>email</code></strong></dt>
+<dd>Facebook <code>email</code>, <code>id</code> or <code>phone number</code></dd>
+<dt><strong><code>password</code></strong></dt>
+<dd>Facebook account password</dd>
+<dt><strong><code>user_agent</code></strong></dt>
+<dd>Custom user agent to use when sending requests. If <code>None</code>, user agent will be chosen from a premade list</dd>
+<dt><strong><code>max_tries</code></strong> :&ensp;<code>int</code></dt>
+<dd>Maximum number of times to try logging in</dd>
+<dt><strong><code>session_cookies</code></strong> :&ensp;<code>dict</code></dt>
+<dd>Cookies from a previous session (Will default to login if these are invalid)</dd>
+<dt><strong><code>logging_level</code></strong> :&ensp;<code>int</code></dt>
+<dd>Configures the <code>logging level &lt;https://docs.python.org/3/library/logging.html#logging-levels&gt;</code>_. Defaults to <code>logging.INFO</code></dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>FBchatException</code></dt>
+<dd>On failed login</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Wrapper(fbchat.Client):
+    &#34;&#34;&#34;
+    Main Wrapper Class
+    includes most functions
+    &#34;&#34;&#34;
+    def __init__(self, email: str, password: str, prefix=&#34;&#34;):
+        
+        _setup()
+        self._command_list = dict()
+        self._event_list = dict()
+        self.Prefix = prefix or &#34;!&#34;
+        print(&#34;logging in&#34;)
+        super().__init__(email, password)
+
+    def _addEvent(self,name,func):
+        self._event_list.update({f&#34;{name}&#34;:func})
+
+    def _addCommand(self, name: str, func, args: list, description: str = None):
+        self._command_list.update({f&#34;{name}&#34;: [func, args, description]})
+
+    def Command(self, name: str, args: list, description: str = None):
+        &#34;&#34;&#34;Register a Command
+
+        Args:
+            name (str): name of the command
+            args (list): list of arguments the command needs [str,str]
+            description (str, optional): description of the command. Defaults to None.
+        &#34;&#34;&#34;
+        def wrapper(func):
+            self._addCommand(name, func, args, description)
+
+        return wrapper
+
+    def Event(self):
+        &#34;&#34;&#34;Register an Event
+        &#34;&#34;&#34;
+        def wrapper(func):
+            self._addEvent(func.__name__, func)
+        return wrapper
+    
+    def _arg_split(self,args):
+        inside = False
+        end = list()
+        part = &#34;&#34;
+        for char in args:
+            if char == &#39;&#34;&#39;:
+                inside = not inside
+                if not inside:
+                    end.append(part)
+            elif char == &#34; &#34;:
+                if inside:
+                    part+=char
+                else:
+                    end.append(part)
+                    part = &#34;&#34;
+            else:
+                part+=char
+        end.append(part)
+        return list(dict.fromkeys(end[1:]))
+
+    def onMessage(
+        self, author_id, message_object, thread_id, thread_type, ts, **kwargs
+    ):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        print(&#34;got message&#34;)
+        if message_object.author == self.uid:
+            return
+        self.mid = message_object.uid
+        try:
+            self.markAsDelivered(thread_id, message_object.uid)
+            self.markAsRead(thread_id)
+        except:
+            print(&#34;Failed to mark as read&#34;)
+        self.thread = (thread_id, thread_type)
+        self.text = message_object.text
+        self.author = self.utils_getUserName(author_id)
+
+        if not self.text: return
+
+        if not self.text.startswith(self.Prefix):
+            if &#34;onMessage&#34; in self._event_list:
+                self._event_list[&#34;onMessage&#34;](author_id=author_id,message_object=message_object,thread_id=thread_id,thread_type=thread_type,ts=ts,**kwargs)
+            return
+        commandName = self.text.replace(self.Prefix, &#34;&#34;, 1).split(&#34; &#34;)[0]
+        args = list()
+        _args = self.text.replace(self.Prefix, &#34;&#34;, 1).replace(commandName, &#34;&#34;, 1)
+        parts = self._arg_split(_args)
+        for part in parts:
+            args.append(part)
+
+        if not commandName in self._command_list:
+            self.reply(f&#34;{commandName} is an invalid command&#34;)
+            raise CommandNotRegisteredException
+
+        command = self._command_list[commandName][0]
+        # argument separation
+        argsdict = dict()
+        for i, x in enumerate(self._command_list[commandName][1]):
+            argsdict.update({x: args[i]})
+        print(f&#34;calling command {command} in {self.thread[0]}&#34;)
+        t = threading.Thread(
+            target=command,
+            kwargs={
+                &#34;text&#34;: self.text,
+                &#34;args&#34;: argsdict,
+                &#34;thread&#34;: self.thread,
+                &#34;author&#34;: self.author,
+                &#34;message&#34;: message_object,
+                &#34;ts&#34;: ts
+            },
+        )
+        t.start()
+
+    def onMessageUnsent(self, **kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMessageUnsent&#34; in self._event_list:
+            self._event_list[&#34;onMessageUnsent&#34;](**kwargs)
+            
+    def on2FACode(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;on2FACode&#34; in self._event_list:
+                self._event_list[&#34;on2FACode&#34;](**kwargs)
+
+    def onAdminAdded(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onAdminAdded&#34; in self._event_list:
+                self._event_list[&#34;onAdminAdded&#34;](**kwargs)
+
+    def onAdminRemoved(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onAdminRemoved&#34; in self._event_list:
+                self._event_list[&#34;onAdminRemoved&#34;](**kwargs)
+
+    def onApprovalModeChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onApprovalModeChange&#34; in self._event_list:
+                self._event_list[&#34;onApprovalModeChange&#34;](**kwargs)
+
+    def onBlock(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onBlock&#34; in self._event_list:
+                self._event_list[&#34;onBlock&#34;](**kwargs)
+
+    def onBuddylistOverlay(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onBuddylistOverlay&#34; in self._event_list:
+                self._event_list[&#34;onBuddylistOverlay&#34;](**kwargs)
+
+    def onCallEnded(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onCallEnded&#34; in self._event_list:
+                self._event_list[&#34;onCallEnded&#34;](**kwargs)
+
+    def onCallStarted(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onCallStarted&#34; in self._event_list:
+                self._event_list[&#34;onCallStarted&#34;](**kwargs)
+
+    def onChatTimestamp(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onChatTimestamp&#34; in self._event_list:
+                self._event_list[&#34;onChatTimestamp&#34;](**kwargs)
+
+    def onColorChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onColorChange&#34; in self._event_list:
+                self._event_list[&#34;onColorChange&#34;](**kwargs)
+
+    def onEmojiChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onEmojiChange&#34; in self._event_list:
+                self._event_list[&#34;onEmojiChange&#34;](**kwargs)
+
+    def onFriendRequest(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onFriendRequest&#34; in self._event_list:
+                self._event_list[&#34;onFriendRequest&#34;](**kwargs)
+
+    def onGamePlayed(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onGamePlayed&#34; in self._event_list:
+                self._event_list[&#34;onGamePlayed&#34;](**kwargs)
+
+    def onImageChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onImageChange&#34; in self._event_list:
+                self._event_list[&#34;onImageChange&#34;](**kwargs)
+
+    def onInbox(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onInbox&#34; in self._event_list:
+                self._event_list[&#34;onInbox&#34;](**kwargs)
+
+
+    def onLiveLocation(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onLiveLocation&#34; in self._event_list:
+                self._event_list[&#34;onLiveLocation&#34;](**kwargs)
+
+    def onLoggedIn(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onLoggedIn&#34; in self._event_list:
+                self._event_list[&#34;onLoggedIn&#34;](**kwargs)
+            
+
+    def onLoggingIn(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onLoggingIn&#34; in self._event_list:
+                self._event_list[&#34;onLoggingIn&#34;](**kwargs)
+
+    def onMarkedSeen(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMarkedSeen&#34; in self._event_list:
+                self._event_list[&#34;onMarkedSeen&#34;](**kwargs)
+
+
+    def onMessageDelivered(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMessageDelivered&#34; in self._event_list:
+                self._event_list[&#34;onMessageDelivered&#34;](**kwargs)
+
+    def onMessageError(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMessageError&#34; in self._event_list:
+                self._event_list[&#34;onMessageError&#34;](**kwargs)
+
+    def onMessageSeen(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMessageSeen&#34; in self._event_list:
+                self._event_list[&#34;onMessageSeen&#34;](**kwargs)
+
+    def onMessageUnsent(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onMessageUnsent&#34; in self._event_list:
+                self._event_list[&#34;onMessageUnsent&#34;](**kwargs)
+
+    def onNicknameChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onNicknameChange&#34; in self._event_list:
+                self._event_list[&#34;onNicknameChange&#34;](**kwargs)
+
+    def onPendingMessage(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPendingMessage&#34; in self._event_list:
+                self._event_list[&#34;onPendingMessage&#34;](**kwargs)
+
+    def onPeopleAdded(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPeopleAdded&#34; in self._event_list:
+                self._event_list[&#34;onPeopleAdded&#34;](**kwargs)
+
+    def onPersonRemoved(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPersonRemoved&#34; in self._event_list:
+                self._event_list[&#34;onPersonRemoved&#34;](**kwargs)
+
+    def onPlanCreated(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPlanCreated&#34; in self._event_list:
+                self._event_list[&#34;onPlanCreated&#34;](**kwargs)
+
+    def onPlanDeleted(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPlanDeleted&#34; in self._event_list:
+                self._event_list[&#34;onPlanDeleted&#34;](**kwargs)
+
+    def onPlanEdited(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPlanEdited&#34; in self._event_list:
+                self._event_list[&#34;onPlanEdited&#34;](**kwargs)
+
+    def onPlanEnded(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPlanEnded&#34; in self._event_list:
+                self._event_list[&#34;onPlanEnded&#34;](**kwargs)
+
+    def onPlanParticipation(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPlanParticipation&#34; in self._event_list:
+                self._event_list[&#34;onPlanParticipation&#34;](**kwargs)
+
+    def onPollCreated(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPollCreated&#34; in self._event_list:
+                self._event_list[&#34;onPollCreated&#34;](**kwargs)
+
+    def onPollVoted(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onPollVoted&#34; in self._event_list:
+                self._event_list[&#34;onPollVoted&#34;](**kwargs)
+
+    def onQprimer(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onQprimer&#34; in self._event_list:
+                self._event_list[&#34;onQprimer&#34;](**kwargs)
+
+    def onReactionAdded(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onReactionAdded&#34; in self._event_list:
+                self._event_list[&#34;onReactionAdded&#34;](**kwargs)
+
+    def onReactionRemoved(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onReactionRemoved&#34; in self._event_list:
+                self._event_list[&#34;onReactionRemoved&#34;](**kwargs)
+
+    def onTitleChange(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onTitleChange&#34; in self._event_list:
+                self._event_list[&#34;onTitleChange&#34;](**kwargs)
+
+    def onTyping(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onTyping&#34; in self._event_list:
+                self._event_list[&#34;onTyping&#34;](**kwargs)
+
+    def onUnblock(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onUnblock&#34; in self._event_list:
+                self._event_list[&#34;onUnblock&#34;](**kwargs)
+
+    def onUnknownMesssageType(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onUnknownMesssageType&#34; in self._event_list:
+                self._event_list[&#34;onUnknownMesssageType&#34;](**kwargs)
+
+    def onUserJoinedCall(self,**kwargs):
+        &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+        if &#34;onUserJoinedCall&#34; in self._event_list:
+                self._event_list[&#34;onUserJoinedCall&#34;](**kwargs)
+
+
+
+
+
+    def sendmsg(self, text: str, thread: tuple = None) -&gt; None:
+        &#34;&#34;&#34;Sends a Message
+
+        Args:
+            text (str): message content
+            thread (tuple, optional): thread tuple. Defaults to None.
+        &#34;&#34;&#34;
+        if thread is None:
+            thread = self.thread
+        thread_id, thread_type = thread
+        self.send(Message(text=text), thread_id=thread_id, thread_type=thread_type)
+    def reply(self, text: str, thread: tuple = None) -&gt; tuple:
+        &#34;&#34;&#34;replies to a message
+
+        Args:
+            text (str): Message Content
+            thread (tuple, optional): thread tuple. Defaults to None.
+
+        Returns:
+            tuple: thread tuple
+        &#34;&#34;&#34;
+        if thread is None:
+            thread = self.thread
+        thread_id, thread_type = thread
+        self.send(
+            fbchat.Message(text=text, reply_to_id=self.mid),
+            thread_id=thread_id,
+            thread_type=thread_type,
+        )
+        return thread
+    def sendFile(self, filepath, message: str = None, thread=None) -&gt; tuple:
+        &#34;&#34;&#34;Sends file
+
+        Args:
+            filepath (_type_): path or link to the file
+            message (str, optional): message to send with the file. Defaults to None.
+            thread (_type_, optional): thread tuple. Defaults to None.
+
+        &#34;&#34;&#34;
+        if thread is None:
+            thread = self.thread
+        thread_id, thread_type = thread
+        if validators.url(filepath):
+            self.sendRemoteFiles(filepath,message=message, thread_id=thread_id, thread_type=thread_type)
+        else:
+            self.sendLocalFiles(filepath, message=message, thread_id=thread_id, thread_type=thread_type)
+
+
+
+    def utils_isURL(self, input):
+        &#34;&#34;&#34;Check if input is url
+
+        Args:
+            input (str): input
+
+        Returns:
+            bool: is url?
+        &#34;&#34;&#34;
+        return validators.url(input)
+    def utils_compressVideo(self, input, output):
+        &#34;&#34;&#34;Compresses video to be sendable with messenger
+
+        Args:
+            input (str): input video file path
+            output (str): output video file path
+        &#34;&#34;&#34;
+        # Reference: https://en.wikipedia.org/wiki/Bit_rate#Encoding_bit_rate
+        min_audio_bitrate = 32000
+        max_audio_bitrate = 256000
+
+        probe = ffmpeg.probe(input)
+        # Video duration, in s.
+        duration = float(probe[&#34;format&#34;][&#34;duration&#34;])
+        # Audio bitrate, in bps.
+        audio_bitrate = float(
+            next((s for s in probe[&#34;streams&#34;] if s[&#34;codec_type&#34;] == &#34;audio&#34;), None)[
+                &#34;bit_rate&#34;
+            ]
+        )
+        # Target total bitrate, in bps.
+        target_total_bitrate = (50000 * 1024 * 8) / (1.073741824 * duration)
+
+        # Target audio bitrate, in bps
+        if 10 * audio_bitrate &gt; target_total_bitrate:
+            audio_bitrate = target_total_bitrate / 10
+            if audio_bitrate &lt; min_audio_bitrate &lt; target_total_bitrate:
+                audio_bitrate = min_audio_bitrate
+            elif audio_bitrate &gt; max_audio_bitrate:
+                audio_bitrate = max_audio_bitrate
+        # Target video bitrate, in bps.
+        video_bitrate = target_total_bitrate - audio_bitrate
+
+        i = ffmpeg.input(input)
+        ffmpeg.output(
+            i,
+            os.devnull,
+            **{&#34;c:v&#34;: &#34;libx264&#34;, &#34;b:v&#34;: video_bitrate, &#34;pass&#34;: 1, &#34;f&#34;: &#34;mp4&#34;},
+        ).overwrite_output().run()
+        ffmpeg.output(
+            i,
+            output,
+            **{
+                &#34;c:v&#34;: &#34;libx264&#34;,
+                &#34;b:v&#34;: video_bitrate,
+                &#34;pass&#34;: 2,
+                &#34;c:a&#34;: &#34;aac&#34;,
+                &#34;b:a&#34;: audio_bitrate,
+            },
+        ).overwrite_output().run()
+    def utils_threadCount(self) -&gt; int:
+        &#34;&#34;&#34;get current alive thread count
+
+        Returns:
+            int: current alive thread count
+        &#34;&#34;&#34;
+        return len(threading.enumerate())
+    def utils_getUserName(self, id: int):
+        &#34;&#34;&#34;Gets the username of user @ id
+
+        Args:
+            id (int): id of user
+        Returns:
+            str: username
+        &#34;&#34;&#34;
+        return self.fetchUserInfo(id)[id].name
+
+    def utils_searchForUsers(self,query: str) -&gt; list:
+        &#34;&#34;&#34;Searches for users
+
+        Args:
+            query (str): query to search for
+
+        Returns:
+            list: list of user ids
+        &#34;&#34;&#34;
+        _ = []
+        for user in self.searchForUsers(query):
+            _.append(user.uid)
+        return _
+    def utils_getThreadType(self,thread_id: int) -&gt; ThreadType:
+        &#34;&#34;&#34;Gets threadtype of a thread @ thread_id
+
+        Args:
+            thread_id (int): the id
+
+        Returns:
+            ThreadType: type of thread
+        &#34;&#34;&#34;
+        return self.fetchThreadInfo(thread_id)[thread_id].type
+
+    def utils_getThreadFromUserIndex(self,userindex: str) -&gt; tuple:
+        &#34;&#34;&#34;Fetches thread from user @ userindex
+
+        Args:
+            userindex (str): username[index]
+
+        Returns:
+            tuple: thread tuple
+        &#34;&#34;&#34;
+        if not userindex: return
+        if userindex.isnumeric(): 
+            thread_type = self.utils_getThreadType(int(userindex))
+            thread_id = userindex
+            thread = (thread_id,thread_type)
+        else:
+            name = userindex.split(&#34;[&#34;)[0]
+            ids = self.utils_searchForUsers(name)
+            thread_id = ids[int(userindex.split(&#34;[&#34;)[1].replace(&#34;]&#34;,&#34;&#34;))]
+            thread_type = self.utils_getThreadType(int(thread_id)) 
+            thread = (thread_id,thread_type)
+        return thread
+    def utils_getIDFromUserIndex(self, userindex:str) -&gt; int:
+        &#34;&#34;&#34;Fetches id of user @ userindex
+
+        Args:
+            userindex (str): username[index]
+
+        Returns:
+            int: user.uid
+        &#34;&#34;&#34;
+        name = userindex.split(&#34;[&#34;)[0]
+        ids = self.utils_searchForUsers(name)
+        return ids[int(userindex.split(&#34;[&#34;)[1].replace(&#34;]&#34;,&#34;&#34;))]
+    def utils_genHelpImg(self) -&gt; str:
+        &#34;&#34;&#34;Generates a png of all help commands
+
+        Returns:
+            str: file path
+        &#34;&#34;&#34;
+        helpdict = dict()
+        for x in self._command_list:
+            helpdict.update(
+                {
+                    x: {
+                        &#34;description&#34;: self._command_list[x][2],
+                        &#34;args&#34;: self._command_list[x][1],
+                    }
+                }
+            )
+        # desciption = 2
+        # args = 1
+        # func = 0
+
+        img = Image.new(&#34;RGBA&#34;, (300, 300), color=(20, 20, 20))
+        I1 = ImageDraw.Draw(img)
+        font = ImageFont.truetype(&#34;./font.ttf&#34;)
+
+        for i, name in enumerate(helpdict):
+
+            I1.text((0, (i + 1) * 10), name, (255, 255, 255), font) # name
+        
+            for y, x in enumerate(helpdict[name][&#34;args&#34;]):
+                I1.text(((5+7*y) * 10, (i + 1) * 10), x, (255, 255, 0), font) # args
+
+            I1.text(
+                (4 * 20 + 100, (i + 1) * 10),
+                helpdict[name][&#34;description&#34;],
+                (255, 255, 255),
+                font,
+            )
+
+        I1.text((0, 290), &#34;marian3 v1.0.0, made with &lt;3 by SneznyKocur&#34;, (190, 255, 190), font)
+        img.save(&#34;./help.png&#34;)
+        return &#34;./help.png&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>py_fbchat._client.Client</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fbchat_wrapper.Wrapper.Command"><code class="name flex">
+<span>def <span class="ident">Command</span></span>(<span>self, name: str, args: list, description: str = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Register a Command</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>name of the command</dd>
+<dt><strong><code>args</code></strong> :&ensp;<code>list</code></dt>
+<dd>list of arguments the command needs [str,str]</dd>
+<dt><strong><code>description</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>description of the command. Defaults to None.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Command(self, name: str, args: list, description: str = None):
+    &#34;&#34;&#34;Register a Command
+
+    Args:
+        name (str): name of the command
+        args (list): list of arguments the command needs [str,str]
+        description (str, optional): description of the command. Defaults to None.
+    &#34;&#34;&#34;
+    def wrapper(func):
+        self._addCommand(name, func, args, description)
+
+    return wrapper</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.Event"><code class="name flex">
+<span>def <span class="ident">Event</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Register an Event</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Event(self):
+    &#34;&#34;&#34;Register an Event
+    &#34;&#34;&#34;
+    def wrapper(func):
+        self._addEvent(func.__name__, func)
+    return wrapper</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.on2FACode"><code class="name flex">
+<span>def <span class="ident">on2FACode</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def on2FACode(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;on2FACode&#34; in self._event_list:
+            self._event_list[&#34;on2FACode&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onAdminAdded"><code class="name flex">
+<span>def <span class="ident">onAdminAdded</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onAdminAdded(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onAdminAdded&#34; in self._event_list:
+            self._event_list[&#34;onAdminAdded&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onAdminRemoved"><code class="name flex">
+<span>def <span class="ident">onAdminRemoved</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onAdminRemoved(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onAdminRemoved&#34; in self._event_list:
+            self._event_list[&#34;onAdminRemoved&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onApprovalModeChange"><code class="name flex">
+<span>def <span class="ident">onApprovalModeChange</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onApprovalModeChange(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onApprovalModeChange&#34; in self._event_list:
+            self._event_list[&#34;onApprovalModeChange&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onBlock"><code class="name flex">
+<span>def <span class="ident">onBlock</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onBlock(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onBlock&#34; in self._event_list:
+            self._event_list[&#34;onBlock&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onBuddylistOverlay"><code class="name flex">
+<span>def <span class="ident">onBuddylistOverlay</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onBuddylistOverlay(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onBuddylistOverlay&#34; in self._event_list:
+            self._event_list[&#34;onBuddylistOverlay&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onCallEnded"><code class="name flex">
+<span>def <span class="ident">onCallEnded</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onCallEnded(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onCallEnded&#34; in self._event_list:
+            self._event_list[&#34;onCallEnded&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onCallStarted"><code class="name flex">
+<span>def <span class="ident">onCallStarted</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onCallStarted(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onCallStarted&#34; in self._event_list:
+            self._event_list[&#34;onCallStarted&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onChatTimestamp"><code class="name flex">
+<span>def <span class="ident">onChatTimestamp</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onChatTimestamp(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onChatTimestamp&#34; in self._event_list:
+            self._event_list[&#34;onChatTimestamp&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onColorChange"><code class="name flex">
+<span>def <span class="ident">onColorChange</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onColorChange(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onColorChange&#34; in self._event_list:
+            self._event_list[&#34;onColorChange&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onEmojiChange"><code class="name flex">
+<span>def <span class="ident">onEmojiChange</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onEmojiChange(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onEmojiChange&#34; in self._event_list:
+            self._event_list[&#34;onEmojiChange&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onFriendRequest"><code class="name flex">
+<span>def <span class="ident">onFriendRequest</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onFriendRequest(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onFriendRequest&#34; in self._event_list:
+            self._event_list[&#34;onFriendRequest&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onGamePlayed"><code class="name flex">
+<span>def <span class="ident">onGamePlayed</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onGamePlayed(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onGamePlayed&#34; in self._event_list:
+            self._event_list[&#34;onGamePlayed&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onImageChange"><code class="name flex">
+<span>def <span class="ident">onImageChange</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onImageChange(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onImageChange&#34; in self._event_list:
+            self._event_list[&#34;onImageChange&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onInbox"><code class="name flex">
+<span>def <span class="ident">onInbox</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onInbox(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onInbox&#34; in self._event_list:
+            self._event_list[&#34;onInbox&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onLiveLocation"><code class="name flex">
+<span>def <span class="ident">onLiveLocation</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onLiveLocation(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onLiveLocation&#34; in self._event_list:
+            self._event_list[&#34;onLiveLocation&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onLoggedIn"><code class="name flex">
+<span>def <span class="ident">onLoggedIn</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onLoggedIn(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onLoggedIn&#34; in self._event_list:
+            self._event_list[&#34;onLoggedIn&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onLoggingIn"><code class="name flex">
+<span>def <span class="ident">onLoggingIn</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onLoggingIn(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onLoggingIn&#34; in self._event_list:
+            self._event_list[&#34;onLoggingIn&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onMarkedSeen"><code class="name flex">
+<span>def <span class="ident">onMarkedSeen</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onMarkedSeen(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onMarkedSeen&#34; in self._event_list:
+            self._event_list[&#34;onMarkedSeen&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onMessage"><code class="name flex">
+<span>def <span class="ident">onMessage</span></span>(<span>self, author_id, message_object, thread_id, thread_type, ts, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onMessage(
+    self, author_id, message_object, thread_id, thread_type, ts, **kwargs
+):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    print(&#34;got message&#34;)
+    if message_object.author == self.uid:
+        return
+    self.mid = message_object.uid
+    try:
+        self.markAsDelivered(thread_id, message_object.uid)
+        self.markAsRead(thread_id)
+    except:
+        print(&#34;Failed to mark as read&#34;)
+    self.thread = (thread_id, thread_type)
+    self.text = message_object.text
+    self.author = self.utils_getUserName(author_id)
+
+    if not self.text: return
+
+    if not self.text.startswith(self.Prefix):
+        if &#34;onMessage&#34; in self._event_list:
+            self._event_list[&#34;onMessage&#34;](author_id=author_id,message_object=message_object,thread_id=thread_id,thread_type=thread_type,ts=ts,**kwargs)
+        return
+    commandName = self.text.replace(self.Prefix, &#34;&#34;, 1).split(&#34; &#34;)[0]
+    args = list()
+    _args = self.text.replace(self.Prefix, &#34;&#34;, 1).replace(commandName, &#34;&#34;, 1)
+    parts = self._arg_split(_args)
+    for part in parts:
+        args.append(part)
+
+    if not commandName in self._command_list:
+        self.reply(f&#34;{commandName} is an invalid command&#34;)
+        raise CommandNotRegisteredException
+
+    command = self._command_list[commandName][0]
+    # argument separation
+    argsdict = dict()
+    for i, x in enumerate(self._command_list[commandName][1]):
+        argsdict.update({x: args[i]})
+    print(f&#34;calling command {command} in {self.thread[0]}&#34;)
+    t = threading.Thread(
+        target=command,
+        kwargs={
+            &#34;text&#34;: self.text,
+            &#34;args&#34;: argsdict,
+            &#34;thread&#34;: self.thread,
+            &#34;author&#34;: self.author,
+            &#34;message&#34;: message_object,
+            &#34;ts&#34;: ts
+        },
+    )
+    t.start()</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onMessageDelivered"><code class="name flex">
+<span>def <span class="ident">onMessageDelivered</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onMessageDelivered(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onMessageDelivered&#34; in self._event_list:
+            self._event_list[&#34;onMessageDelivered&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onMessageError"><code class="name flex">
+<span>def <span class="ident">onMessageError</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onMessageError(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onMessageError&#34; in self._event_list:
+            self._event_list[&#34;onMessageError&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onMessageSeen"><code class="name flex">
+<span>def <span class="ident">onMessageSeen</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onMessageSeen(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onMessageSeen&#34; in self._event_list:
+            self._event_list[&#34;onMessageSeen&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onMessageUnsent"><code class="name flex">
+<span>def <span class="ident">onMessageUnsent</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onMessageUnsent(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onMessageUnsent&#34; in self._event_list:
+            self._event_list[&#34;onMessageUnsent&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onNicknameChange"><code class="name flex">
+<span>def <span class="ident">onNicknameChange</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onNicknameChange(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onNicknameChange&#34; in self._event_list:
+            self._event_list[&#34;onNicknameChange&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onPendingMessage"><code class="name flex">
+<span>def <span class="ident">onPendingMessage</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onPendingMessage(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onPendingMessage&#34; in self._event_list:
+            self._event_list[&#34;onPendingMessage&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onPeopleAdded"><code class="name flex">
+<span>def <span class="ident">onPeopleAdded</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onPeopleAdded(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onPeopleAdded&#34; in self._event_list:
+            self._event_list[&#34;onPeopleAdded&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onPersonRemoved"><code class="name flex">
+<span>def <span class="ident">onPersonRemoved</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onPersonRemoved(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onPersonRemoved&#34; in self._event_list:
+            self._event_list[&#34;onPersonRemoved&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onPlanCreated"><code class="name flex">
+<span>def <span class="ident">onPlanCreated</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onPlanCreated(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onPlanCreated&#34; in self._event_list:
+            self._event_list[&#34;onPlanCreated&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onPlanDeleted"><code class="name flex">
+<span>def <span class="ident">onPlanDeleted</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onPlanDeleted(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onPlanDeleted&#34; in self._event_list:
+            self._event_list[&#34;onPlanDeleted&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onPlanEdited"><code class="name flex">
+<span>def <span class="ident">onPlanEdited</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onPlanEdited(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onPlanEdited&#34; in self._event_list:
+            self._event_list[&#34;onPlanEdited&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onPlanEnded"><code class="name flex">
+<span>def <span class="ident">onPlanEnded</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onPlanEnded(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onPlanEnded&#34; in self._event_list:
+            self._event_list[&#34;onPlanEnded&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onPlanParticipation"><code class="name flex">
+<span>def <span class="ident">onPlanParticipation</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onPlanParticipation(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onPlanParticipation&#34; in self._event_list:
+            self._event_list[&#34;onPlanParticipation&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onPollCreated"><code class="name flex">
+<span>def <span class="ident">onPollCreated</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onPollCreated(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onPollCreated&#34; in self._event_list:
+            self._event_list[&#34;onPollCreated&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onPollVoted"><code class="name flex">
+<span>def <span class="ident">onPollVoted</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onPollVoted(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onPollVoted&#34; in self._event_list:
+            self._event_list[&#34;onPollVoted&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onQprimer"><code class="name flex">
+<span>def <span class="ident">onQprimer</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onQprimer(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onQprimer&#34; in self._event_list:
+            self._event_list[&#34;onQprimer&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onReactionAdded"><code class="name flex">
+<span>def <span class="ident">onReactionAdded</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onReactionAdded(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onReactionAdded&#34; in self._event_list:
+            self._event_list[&#34;onReactionAdded&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onReactionRemoved"><code class="name flex">
+<span>def <span class="ident">onReactionRemoved</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onReactionRemoved(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onReactionRemoved&#34; in self._event_list:
+            self._event_list[&#34;onReactionRemoved&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onTitleChange"><code class="name flex">
+<span>def <span class="ident">onTitleChange</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onTitleChange(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onTitleChange&#34; in self._event_list:
+            self._event_list[&#34;onTitleChange&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onTyping"><code class="name flex">
+<span>def <span class="ident">onTyping</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onTyping(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onTyping&#34; in self._event_list:
+            self._event_list[&#34;onTyping&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onUnblock"><code class="name flex">
+<span>def <span class="ident">onUnblock</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onUnblock(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onUnblock&#34; in self._event_list:
+            self._event_list[&#34;onUnblock&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onUnknownMesssageType"><code class="name flex">
+<span>def <span class="ident">onUnknownMesssageType</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onUnknownMesssageType(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onUnknownMesssageType&#34; in self._event_list:
+            self._event_list[&#34;onUnknownMesssageType&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.onUserJoinedCall"><code class="name flex">
+<span>def <span class="ident">onUserJoinedCall</span></span>(<span>self, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>DO NOT CALL (event handle)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onUserJoinedCall(self,**kwargs):
+    &#34;&#34;&#34;DO NOT CALL (event handle)&#34;&#34;&#34;
+    if &#34;onUserJoinedCall&#34; in self._event_list:
+            self._event_list[&#34;onUserJoinedCall&#34;](**kwargs)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.reply"><code class="name flex">
+<span>def <span class="ident">reply</span></span>(<span>self, text: str, thread: tuple = None) ‑> tuple</span>
+</code></dt>
+<dd>
+<div class="desc"><p>replies to a message</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Message Content</dd>
+<dt><strong><code>thread</code></strong> :&ensp;<code>tuple</code>, optional</dt>
+<dd>thread tuple. Defaults to None.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>thread tuple</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reply(self, text: str, thread: tuple = None) -&gt; tuple:
+    &#34;&#34;&#34;replies to a message
+
+    Args:
+        text (str): Message Content
+        thread (tuple, optional): thread tuple. Defaults to None.
+
+    Returns:
+        tuple: thread tuple
+    &#34;&#34;&#34;
+    if thread is None:
+        thread = self.thread
+    thread_id, thread_type = thread
+    self.send(
+        fbchat.Message(text=text, reply_to_id=self.mid),
+        thread_id=thread_id,
+        thread_type=thread_type,
+    )
+    return thread</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.sendFile"><code class="name flex">
+<span>def <span class="ident">sendFile</span></span>(<span>self, filepath, message: str = None, thread=None) ‑> tuple</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sends file</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>filepath</code></strong> :&ensp;<code>_type_</code></dt>
+<dd>path or link to the file</dd>
+<dt><strong><code>message</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>message to send with the file. Defaults to None.</dd>
+<dt><strong><code>thread</code></strong> :&ensp;<code>_type_</code>, optional</dt>
+<dd>thread tuple. Defaults to None.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sendFile(self, filepath, message: str = None, thread=None) -&gt; tuple:
+    &#34;&#34;&#34;Sends file
+
+    Args:
+        filepath (_type_): path or link to the file
+        message (str, optional): message to send with the file. Defaults to None.
+        thread (_type_, optional): thread tuple. Defaults to None.
+
+    &#34;&#34;&#34;
+    if thread is None:
+        thread = self.thread
+    thread_id, thread_type = thread
+    if validators.url(filepath):
+        self.sendRemoteFiles(filepath,message=message, thread_id=thread_id, thread_type=thread_type)
+    else:
+        self.sendLocalFiles(filepath, message=message, thread_id=thread_id, thread_type=thread_type)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.sendmsg"><code class="name flex">
+<span>def <span class="ident">sendmsg</span></span>(<span>self, text: str, thread: tuple = None) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sends a Message</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>message content</dd>
+<dt><strong><code>thread</code></strong> :&ensp;<code>tuple</code>, optional</dt>
+<dd>thread tuple. Defaults to None.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sendmsg(self, text: str, thread: tuple = None) -&gt; None:
+    &#34;&#34;&#34;Sends a Message
+
+    Args:
+        text (str): message content
+        thread (tuple, optional): thread tuple. Defaults to None.
+    &#34;&#34;&#34;
+    if thread is None:
+        thread = self.thread
+    thread_id, thread_type = thread
+    self.send(Message(text=text), thread_id=thread_id, thread_type=thread_type)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.utils_compressVideo"><code class="name flex">
+<span>def <span class="ident">utils_compressVideo</span></span>(<span>self, input, output)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compresses video to be sendable with messenger</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>input</code></strong> :&ensp;<code>str</code></dt>
+<dd>input video file path</dd>
+<dt><strong><code>output</code></strong> :&ensp;<code>str</code></dt>
+<dd>output video file path</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def utils_compressVideo(self, input, output):
+    &#34;&#34;&#34;Compresses video to be sendable with messenger
+
+    Args:
+        input (str): input video file path
+        output (str): output video file path
+    &#34;&#34;&#34;
+    # Reference: https://en.wikipedia.org/wiki/Bit_rate#Encoding_bit_rate
+    min_audio_bitrate = 32000
+    max_audio_bitrate = 256000
+
+    probe = ffmpeg.probe(input)
+    # Video duration, in s.
+    duration = float(probe[&#34;format&#34;][&#34;duration&#34;])
+    # Audio bitrate, in bps.
+    audio_bitrate = float(
+        next((s for s in probe[&#34;streams&#34;] if s[&#34;codec_type&#34;] == &#34;audio&#34;), None)[
+            &#34;bit_rate&#34;
+        ]
+    )
+    # Target total bitrate, in bps.
+    target_total_bitrate = (50000 * 1024 * 8) / (1.073741824 * duration)
+
+    # Target audio bitrate, in bps
+    if 10 * audio_bitrate &gt; target_total_bitrate:
+        audio_bitrate = target_total_bitrate / 10
+        if audio_bitrate &lt; min_audio_bitrate &lt; target_total_bitrate:
+            audio_bitrate = min_audio_bitrate
+        elif audio_bitrate &gt; max_audio_bitrate:
+            audio_bitrate = max_audio_bitrate
+    # Target video bitrate, in bps.
+    video_bitrate = target_total_bitrate - audio_bitrate
+
+    i = ffmpeg.input(input)
+    ffmpeg.output(
+        i,
+        os.devnull,
+        **{&#34;c:v&#34;: &#34;libx264&#34;, &#34;b:v&#34;: video_bitrate, &#34;pass&#34;: 1, &#34;f&#34;: &#34;mp4&#34;},
+    ).overwrite_output().run()
+    ffmpeg.output(
+        i,
+        output,
+        **{
+            &#34;c:v&#34;: &#34;libx264&#34;,
+            &#34;b:v&#34;: video_bitrate,
+            &#34;pass&#34;: 2,
+            &#34;c:a&#34;: &#34;aac&#34;,
+            &#34;b:a&#34;: audio_bitrate,
+        },
+    ).overwrite_output().run()</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.utils_genHelpImg"><code class="name flex">
+<span>def <span class="ident">utils_genHelpImg</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates a png of all help commands</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>file path</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def utils_genHelpImg(self) -&gt; str:
+    &#34;&#34;&#34;Generates a png of all help commands
+
+    Returns:
+        str: file path
+    &#34;&#34;&#34;
+    helpdict = dict()
+    for x in self._command_list:
+        helpdict.update(
+            {
+                x: {
+                    &#34;description&#34;: self._command_list[x][2],
+                    &#34;args&#34;: self._command_list[x][1],
+                }
+            }
+        )
+    # desciption = 2
+    # args = 1
+    # func = 0
+
+    img = Image.new(&#34;RGBA&#34;, (300, 300), color=(20, 20, 20))
+    I1 = ImageDraw.Draw(img)
+    font = ImageFont.truetype(&#34;./font.ttf&#34;)
+
+    for i, name in enumerate(helpdict):
+
+        I1.text((0, (i + 1) * 10), name, (255, 255, 255), font) # name
+    
+        for y, x in enumerate(helpdict[name][&#34;args&#34;]):
+            I1.text(((5+7*y) * 10, (i + 1) * 10), x, (255, 255, 0), font) # args
+
+        I1.text(
+            (4 * 20 + 100, (i + 1) * 10),
+            helpdict[name][&#34;description&#34;],
+            (255, 255, 255),
+            font,
+        )
+
+    I1.text((0, 290), &#34;marian3 v1.0.0, made with &lt;3 by SneznyKocur&#34;, (190, 255, 190), font)
+    img.save(&#34;./help.png&#34;)
+    return &#34;./help.png&#34;</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.utils_getIDFromUserIndex"><code class="name flex">
+<span>def <span class="ident">utils_getIDFromUserIndex</span></span>(<span>self, userindex: str) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Fetches id of user @ userindex</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>userindex</code></strong> :&ensp;<code>str</code></dt>
+<dd>username[index]</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>user.uid</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def utils_getIDFromUserIndex(self, userindex:str) -&gt; int:
+    &#34;&#34;&#34;Fetches id of user @ userindex
+
+    Args:
+        userindex (str): username[index]
+
+    Returns:
+        int: user.uid
+    &#34;&#34;&#34;
+    name = userindex.split(&#34;[&#34;)[0]
+    ids = self.utils_searchForUsers(name)
+    return ids[int(userindex.split(&#34;[&#34;)[1].replace(&#34;]&#34;,&#34;&#34;))]</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.utils_getThreadFromUserIndex"><code class="name flex">
+<span>def <span class="ident">utils_getThreadFromUserIndex</span></span>(<span>self, userindex: str) ‑> tuple</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Fetches thread from user @ userindex</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>userindex</code></strong> :&ensp;<code>str</code></dt>
+<dd>username[index]</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>thread tuple</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def utils_getThreadFromUserIndex(self,userindex: str) -&gt; tuple:
+    &#34;&#34;&#34;Fetches thread from user @ userindex
+
+    Args:
+        userindex (str): username[index]
+
+    Returns:
+        tuple: thread tuple
+    &#34;&#34;&#34;
+    if not userindex: return
+    if userindex.isnumeric(): 
+        thread_type = self.utils_getThreadType(int(userindex))
+        thread_id = userindex
+        thread = (thread_id,thread_type)
+    else:
+        name = userindex.split(&#34;[&#34;)[0]
+        ids = self.utils_searchForUsers(name)
+        thread_id = ids[int(userindex.split(&#34;[&#34;)[1].replace(&#34;]&#34;,&#34;&#34;))]
+        thread_type = self.utils_getThreadType(int(thread_id)) 
+        thread = (thread_id,thread_type)
+    return thread</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.utils_getThreadType"><code class="name flex">
+<span>def <span class="ident">utils_getThreadType</span></span>(<span>self, thread_id: int) ‑> py_fbchat._thread.ThreadType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets threadtype of a thread @ thread_id</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>thread_id</code></strong> :&ensp;<code>int</code></dt>
+<dd>the id</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ThreadType</code></dt>
+<dd>type of thread</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def utils_getThreadType(self,thread_id: int) -&gt; ThreadType:
+    &#34;&#34;&#34;Gets threadtype of a thread @ thread_id
+
+    Args:
+        thread_id (int): the id
+
+    Returns:
+        ThreadType: type of thread
+    &#34;&#34;&#34;
+    return self.fetchThreadInfo(thread_id)[thread_id].type</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.utils_getUserName"><code class="name flex">
+<span>def <span class="ident">utils_getUserName</span></span>(<span>self, id: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the username of user @ id</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>id</code></strong> :&ensp;<code>int</code></dt>
+<dd>id of user</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>username</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def utils_getUserName(self, id: int):
+    &#34;&#34;&#34;Gets the username of user @ id
+
+    Args:
+        id (int): id of user
+    Returns:
+        str: username
+    &#34;&#34;&#34;
+    return self.fetchUserInfo(id)[id].name</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.utils_isURL"><code class="name flex">
+<span>def <span class="ident">utils_isURL</span></span>(<span>self, input)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if input is url</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>input</code></strong> :&ensp;<code>str</code></dt>
+<dd>input</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>is url?</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def utils_isURL(self, input):
+    &#34;&#34;&#34;Check if input is url
+
+    Args:
+        input (str): input
+
+    Returns:
+        bool: is url?
+    &#34;&#34;&#34;
+    return validators.url(input)</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.utils_searchForUsers"><code class="name flex">
+<span>def <span class="ident">utils_searchForUsers</span></span>(<span>self, query: str) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Searches for users</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>query</code></strong> :&ensp;<code>str</code></dt>
+<dd>query to search for</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>list of user ids</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def utils_searchForUsers(self,query: str) -&gt; list:
+    &#34;&#34;&#34;Searches for users
+
+    Args:
+        query (str): query to search for
+
+    Returns:
+        list: list of user ids
+    &#34;&#34;&#34;
+    _ = []
+    for user in self.searchForUsers(query):
+        _.append(user.uid)
+    return _</code></pre>
+</details>
+</dd>
+<dt id="fbchat_wrapper.Wrapper.utils_threadCount"><code class="name flex">
+<span>def <span class="ident">utils_threadCount</span></span>(<span>self) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>get current alive thread count</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>int</code></dt>
+<dd>current alive thread count</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def utils_threadCount(self) -&gt; int:
+    &#34;&#34;&#34;get current alive thread count
+
+    Returns:
+        int: current alive thread count
+    &#34;&#34;&#34;
+    return len(threading.enumerate())</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="fbchat_wrapper.CommandNotRegisteredException" href="#fbchat_wrapper.CommandNotRegisteredException">CommandNotRegisteredException</a></code></h4>
+</li>
+<li>
+<h4><code><a title="fbchat_wrapper.Wrapper" href="#fbchat_wrapper.Wrapper">Wrapper</a></code></h4>
+<ul class="">
+<li><code><a title="fbchat_wrapper.Wrapper.Command" href="#fbchat_wrapper.Wrapper.Command">Command</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.Event" href="#fbchat_wrapper.Wrapper.Event">Event</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.on2FACode" href="#fbchat_wrapper.Wrapper.on2FACode">on2FACode</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onAdminAdded" href="#fbchat_wrapper.Wrapper.onAdminAdded">onAdminAdded</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onAdminRemoved" href="#fbchat_wrapper.Wrapper.onAdminRemoved">onAdminRemoved</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onApprovalModeChange" href="#fbchat_wrapper.Wrapper.onApprovalModeChange">onApprovalModeChange</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onBlock" href="#fbchat_wrapper.Wrapper.onBlock">onBlock</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onBuddylistOverlay" href="#fbchat_wrapper.Wrapper.onBuddylistOverlay">onBuddylistOverlay</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onCallEnded" href="#fbchat_wrapper.Wrapper.onCallEnded">onCallEnded</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onCallStarted" href="#fbchat_wrapper.Wrapper.onCallStarted">onCallStarted</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onChatTimestamp" href="#fbchat_wrapper.Wrapper.onChatTimestamp">onChatTimestamp</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onColorChange" href="#fbchat_wrapper.Wrapper.onColorChange">onColorChange</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onEmojiChange" href="#fbchat_wrapper.Wrapper.onEmojiChange">onEmojiChange</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onFriendRequest" href="#fbchat_wrapper.Wrapper.onFriendRequest">onFriendRequest</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onGamePlayed" href="#fbchat_wrapper.Wrapper.onGamePlayed">onGamePlayed</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onImageChange" href="#fbchat_wrapper.Wrapper.onImageChange">onImageChange</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onInbox" href="#fbchat_wrapper.Wrapper.onInbox">onInbox</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onLiveLocation" href="#fbchat_wrapper.Wrapper.onLiveLocation">onLiveLocation</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onLoggedIn" href="#fbchat_wrapper.Wrapper.onLoggedIn">onLoggedIn</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onLoggingIn" href="#fbchat_wrapper.Wrapper.onLoggingIn">onLoggingIn</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onMarkedSeen" href="#fbchat_wrapper.Wrapper.onMarkedSeen">onMarkedSeen</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onMessage" href="#fbchat_wrapper.Wrapper.onMessage">onMessage</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onMessageDelivered" href="#fbchat_wrapper.Wrapper.onMessageDelivered">onMessageDelivered</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onMessageError" href="#fbchat_wrapper.Wrapper.onMessageError">onMessageError</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onMessageSeen" href="#fbchat_wrapper.Wrapper.onMessageSeen">onMessageSeen</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onMessageUnsent" href="#fbchat_wrapper.Wrapper.onMessageUnsent">onMessageUnsent</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onNicknameChange" href="#fbchat_wrapper.Wrapper.onNicknameChange">onNicknameChange</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onPendingMessage" href="#fbchat_wrapper.Wrapper.onPendingMessage">onPendingMessage</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onPeopleAdded" href="#fbchat_wrapper.Wrapper.onPeopleAdded">onPeopleAdded</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onPersonRemoved" href="#fbchat_wrapper.Wrapper.onPersonRemoved">onPersonRemoved</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onPlanCreated" href="#fbchat_wrapper.Wrapper.onPlanCreated">onPlanCreated</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onPlanDeleted" href="#fbchat_wrapper.Wrapper.onPlanDeleted">onPlanDeleted</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onPlanEdited" href="#fbchat_wrapper.Wrapper.onPlanEdited">onPlanEdited</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onPlanEnded" href="#fbchat_wrapper.Wrapper.onPlanEnded">onPlanEnded</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onPlanParticipation" href="#fbchat_wrapper.Wrapper.onPlanParticipation">onPlanParticipation</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onPollCreated" href="#fbchat_wrapper.Wrapper.onPollCreated">onPollCreated</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onPollVoted" href="#fbchat_wrapper.Wrapper.onPollVoted">onPollVoted</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onQprimer" href="#fbchat_wrapper.Wrapper.onQprimer">onQprimer</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onReactionAdded" href="#fbchat_wrapper.Wrapper.onReactionAdded">onReactionAdded</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onReactionRemoved" href="#fbchat_wrapper.Wrapper.onReactionRemoved">onReactionRemoved</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onTitleChange" href="#fbchat_wrapper.Wrapper.onTitleChange">onTitleChange</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onTyping" href="#fbchat_wrapper.Wrapper.onTyping">onTyping</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onUnblock" href="#fbchat_wrapper.Wrapper.onUnblock">onUnblock</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onUnknownMesssageType" href="#fbchat_wrapper.Wrapper.onUnknownMesssageType">onUnknownMesssageType</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.onUserJoinedCall" href="#fbchat_wrapper.Wrapper.onUserJoinedCall">onUserJoinedCall</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.reply" href="#fbchat_wrapper.Wrapper.reply">reply</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.sendFile" href="#fbchat_wrapper.Wrapper.sendFile">sendFile</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.sendmsg" href="#fbchat_wrapper.Wrapper.sendmsg">sendmsg</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.utils_compressVideo" href="#fbchat_wrapper.Wrapper.utils_compressVideo">utils_compressVideo</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.utils_genHelpImg" href="#fbchat_wrapper.Wrapper.utils_genHelpImg">utils_genHelpImg</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.utils_getIDFromUserIndex" href="#fbchat_wrapper.Wrapper.utils_getIDFromUserIndex">utils_getIDFromUserIndex</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.utils_getThreadFromUserIndex" href="#fbchat_wrapper.Wrapper.utils_getThreadFromUserIndex">utils_getThreadFromUserIndex</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.utils_getThreadType" href="#fbchat_wrapper.Wrapper.utils_getThreadType">utils_getThreadType</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.utils_getUserName" href="#fbchat_wrapper.Wrapper.utils_getUserName">utils_getUserName</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.utils_isURL" href="#fbchat_wrapper.Wrapper.utils_isURL">utils_isURL</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.utils_searchForUsers" href="#fbchat_wrapper.Wrapper.utils_searchForUsers">utils_searchForUsers</a></code></li>
+<li><code><a title="fbchat_wrapper.Wrapper.utils_threadCount" href="#fbchat_wrapper.Wrapper.utils_threadCount">utils_threadCount</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

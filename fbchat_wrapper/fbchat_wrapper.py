@@ -22,7 +22,7 @@ import ffmpeg
 from zipfile import ZipFile
 import wget
 
-def setup():
+def _setup():
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     if not "ffmpeg.exe" in os.listdir() or not "font.ttf" in os.listdir():
         print(f"Downloading ffmpeg to {os.getcwd()}")
@@ -42,7 +42,8 @@ class Wrapper(fbchat.Client):
     includes most functions
     """
     def __init__(self, email: str, password: str, prefix=""):
-        setup()
+        
+        _setup()
         self._command_list = dict()
         self._event_list = dict()
         self.Prefix = prefix or "!"
@@ -56,8 +57,12 @@ class Wrapper(fbchat.Client):
         self._command_list.update({f"{name}": [func, args, description]})
 
     def Command(self, name: str, args: list, description: str = None):
-        """
-        Registers a Command
+        """Register a Command
+
+        Args:
+            name (str): name of the command
+            args (list): list of arguments the command needs [str,str]
+            description (str, optional): description of the command. Defaults to None.
         """
         def wrapper(func):
             self._addCommand(name, func, args, description)
@@ -65,8 +70,7 @@ class Wrapper(fbchat.Client):
         return wrapper
 
     def Event(self):
-        """
-        Registers an Event
+        """Register an Event
         """
         def wrapper(func):
             self._addEvent(func.__name__, func)
@@ -95,6 +99,7 @@ class Wrapper(fbchat.Client):
     def onMessage(
         self, author_id, message_object, thread_id, thread_type, ts, **kwargs
     ):
+        """DO NOT CALL (event handle)"""
         print("got message")
         if message_object.author == self.uid:
             return
@@ -145,176 +150,220 @@ class Wrapper(fbchat.Client):
         t.start()
 
     def onMessageUnsent(self, **kwargs):
+        """DO NOT CALL (event handle)"""
         if "onMessageUnsent" in self._event_list:
             self._event_list["onMessageUnsent"](**kwargs)
             
     def on2FACode(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "on2FACode" in self._event_list:
                 self._event_list["on2FACode"](**kwargs)
 
     def onAdminAdded(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onAdminAdded" in self._event_list:
                 self._event_list["onAdminAdded"](**kwargs)
 
     def onAdminRemoved(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onAdminRemoved" in self._event_list:
                 self._event_list["onAdminRemoved"](**kwargs)
 
     def onApprovalModeChange(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onApprovalModeChange" in self._event_list:
                 self._event_list["onApprovalModeChange"](**kwargs)
 
     def onBlock(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onBlock" in self._event_list:
                 self._event_list["onBlock"](**kwargs)
 
     def onBuddylistOverlay(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onBuddylistOverlay" in self._event_list:
                 self._event_list["onBuddylistOverlay"](**kwargs)
 
     def onCallEnded(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onCallEnded" in self._event_list:
                 self._event_list["onCallEnded"](**kwargs)
 
     def onCallStarted(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onCallStarted" in self._event_list:
                 self._event_list["onCallStarted"](**kwargs)
 
     def onChatTimestamp(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onChatTimestamp" in self._event_list:
                 self._event_list["onChatTimestamp"](**kwargs)
 
     def onColorChange(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onColorChange" in self._event_list:
                 self._event_list["onColorChange"](**kwargs)
 
     def onEmojiChange(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onEmojiChange" in self._event_list:
                 self._event_list["onEmojiChange"](**kwargs)
 
     def onFriendRequest(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onFriendRequest" in self._event_list:
                 self._event_list["onFriendRequest"](**kwargs)
 
     def onGamePlayed(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onGamePlayed" in self._event_list:
                 self._event_list["onGamePlayed"](**kwargs)
 
     def onImageChange(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onImageChange" in self._event_list:
                 self._event_list["onImageChange"](**kwargs)
 
     def onInbox(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onInbox" in self._event_list:
                 self._event_list["onInbox"](**kwargs)
 
 
     def onLiveLocation(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onLiveLocation" in self._event_list:
                 self._event_list["onLiveLocation"](**kwargs)
 
     def onLoggedIn(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onLoggedIn" in self._event_list:
                 self._event_list["onLoggedIn"](**kwargs)
+            
 
     def onLoggingIn(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onLoggingIn" in self._event_list:
                 self._event_list["onLoggingIn"](**kwargs)
 
     def onMarkedSeen(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onMarkedSeen" in self._event_list:
                 self._event_list["onMarkedSeen"](**kwargs)
 
 
     def onMessageDelivered(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onMessageDelivered" in self._event_list:
                 self._event_list["onMessageDelivered"](**kwargs)
 
     def onMessageError(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onMessageError" in self._event_list:
                 self._event_list["onMessageError"](**kwargs)
 
     def onMessageSeen(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onMessageSeen" in self._event_list:
                 self._event_list["onMessageSeen"](**kwargs)
 
     def onMessageUnsent(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onMessageUnsent" in self._event_list:
                 self._event_list["onMessageUnsent"](**kwargs)
 
     def onNicknameChange(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onNicknameChange" in self._event_list:
                 self._event_list["onNicknameChange"](**kwargs)
 
     def onPendingMessage(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onPendingMessage" in self._event_list:
                 self._event_list["onPendingMessage"](**kwargs)
 
     def onPeopleAdded(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onPeopleAdded" in self._event_list:
                 self._event_list["onPeopleAdded"](**kwargs)
 
     def onPersonRemoved(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onPersonRemoved" in self._event_list:
                 self._event_list["onPersonRemoved"](**kwargs)
 
     def onPlanCreated(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onPlanCreated" in self._event_list:
                 self._event_list["onPlanCreated"](**kwargs)
 
     def onPlanDeleted(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onPlanDeleted" in self._event_list:
                 self._event_list["onPlanDeleted"](**kwargs)
 
     def onPlanEdited(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onPlanEdited" in self._event_list:
                 self._event_list["onPlanEdited"](**kwargs)
 
     def onPlanEnded(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onPlanEnded" in self._event_list:
                 self._event_list["onPlanEnded"](**kwargs)
 
     def onPlanParticipation(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onPlanParticipation" in self._event_list:
                 self._event_list["onPlanParticipation"](**kwargs)
 
     def onPollCreated(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onPollCreated" in self._event_list:
                 self._event_list["onPollCreated"](**kwargs)
 
     def onPollVoted(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onPollVoted" in self._event_list:
                 self._event_list["onPollVoted"](**kwargs)
 
     def onQprimer(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onQprimer" in self._event_list:
                 self._event_list["onQprimer"](**kwargs)
 
     def onReactionAdded(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onReactionAdded" in self._event_list:
                 self._event_list["onReactionAdded"](**kwargs)
 
     def onReactionRemoved(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onReactionRemoved" in self._event_list:
                 self._event_list["onReactionRemoved"](**kwargs)
 
     def onTitleChange(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onTitleChange" in self._event_list:
                 self._event_list["onTitleChange"](**kwargs)
 
     def onTyping(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onTyping" in self._event_list:
                 self._event_list["onTyping"](**kwargs)
 
     def onUnblock(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onUnblock" in self._event_list:
                 self._event_list["onUnblock"](**kwargs)
 
     def onUnknownMesssageType(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onUnknownMesssageType" in self._event_list:
                 self._event_list["onUnknownMesssageType"](**kwargs)
 
     def onUserJoinedCall(self,**kwargs):
+        """DO NOT CALL (event handle)"""
         if "onUserJoinedCall" in self._event_list:
                 self._event_list["onUserJoinedCall"](**kwargs)
 
@@ -323,21 +372,25 @@ class Wrapper(fbchat.Client):
 
 
     def sendmsg(self, text: str, thread: tuple = None) -> None:
-        """
-        Sends a Message to a thread
-        if thread is None, thread is the thread of the last message sent
+        """Sends a Message
 
+        Args:
+            text (str): message content
+            thread (tuple, optional): thread tuple. Defaults to None.
         """
         if thread is None:
             thread = self.thread
         thread_id, thread_type = thread
         self.send(Message(text=text), thread_id=thread_id, thread_type=thread_type)
     def reply(self, text: str, thread: tuple = None) -> tuple:
-        """
-        Replies to last message sent 
-        if thread is None, thread is the thread of the last message sent
+        """replies to a message
 
-        Returns thread tuple
+        Args:
+            text (str): Message Content
+            thread (tuple, optional): thread tuple. Defaults to None.
+
+        Returns:
+            tuple: thread tuple
         """
         if thread is None:
             thread = self.thread
@@ -349,11 +402,13 @@ class Wrapper(fbchat.Client):
         )
         return thread
     def sendFile(self, filepath, message: str = None, thread=None) -> tuple:
-        """
-        Sends File to a thread
-        if thread is None, thread is the thread of the last message sent
+        """Sends file
 
-        Returns thread tuple
+        Args:
+            filepath (_type_): path or link to the file
+            message (str, optional): message to send with the file. Defaults to None.
+            thread (_type_, optional): thread tuple. Defaults to None.
+
         """
         if thread is None:
             thread = self.thread
@@ -366,13 +421,21 @@ class Wrapper(fbchat.Client):
 
 
     def utils_isURL(self, input):
-        """
-        Returns True if input is url
+        """Check if input is url
+
+        Args:
+            input (str): input
+
+        Returns:
+            bool: is url?
         """
         return validators.url(input)
     def utils_compressVideo(self, input, output):
-        """
-        Compresses video to be sendable with messenger
+        """Compresses video to be sendable with messenger
+
+        Args:
+            input (str): input video file path
+            output (str): output video file path
         """
         # Reference: https://en.wikipedia.org/wiki/Bit_rate#Encoding_bit_rate
         min_audio_bitrate = 32000
@@ -418,33 +481,54 @@ class Wrapper(fbchat.Client):
             },
         ).overwrite_output().run()
     def utils_threadCount(self) -> int:
-        """
-        Returns current alive thread count
+        """get current alive thread count
+
+        Returns:
+            int: current alive thread count
         """
         return len(threading.enumerate())
     def utils_getUserName(self, id: int):
-        """
-        Gets the username of a user
+        """Gets the username of user @ id
+
+        Args:
+            id (int): id of user
+        Returns:
+            str: username
         """
         return self.fetchUserInfo(id)[id].name
 
     def utils_searchForUsers(self,query: str) -> list:
-        """
-        returns list of user ids for the query
+        """Searches for users
+
+        Args:
+            query (str): query to search for
+
+        Returns:
+            list: list of user ids
         """
         _ = []
         for user in self.searchForUsers(query):
             _.append(user.uid)
         return _
     def utils_getThreadType(self,thread_id: int) -> ThreadType:
-        """
-        Fetches the threadtype of a thread
+        """Gets threadtype of a thread @ thread_id
+
+        Args:
+            thread_id (int): the id
+
+        Returns:
+            ThreadType: type of thread
         """
         return self.fetchThreadInfo(thread_id)[thread_id].type
 
     def utils_getThreadFromUserIndex(self,userindex: str) -> tuple:
-        """
-        Fetches the thread ID of user[index]
+        """Fetches thread from user @ userindex
+
+        Args:
+            userindex (str): username[index]
+
+        Returns:
+            tuple: thread tuple
         """
         if not userindex: return
         if userindex.isnumeric(): 
@@ -459,15 +543,22 @@ class Wrapper(fbchat.Client):
             thread = (thread_id,thread_type)
         return thread
     def utils_getIDFromUserIndex(self, userindex:str) -> int:
-        """
-        Fetches the ID of user[index]
+        """Fetches id of user @ userindex
+
+        Args:
+            userindex (str): username[index]
+
+        Returns:
+            int: user.uid
         """
         name = userindex.split("[")[0]
         ids = self.utils_searchForUsers(name)
         return ids[int(userindex.split("[")[1].replace("]",""))]
     def utils_genHelpImg(self) -> str:
-        """
-        Generates a help.png image with all registered commands
+        """Generates a png of all help commands
+
+        Returns:
+            str: file path
         """
         helpdict = dict()
         for x in self._command_list:
