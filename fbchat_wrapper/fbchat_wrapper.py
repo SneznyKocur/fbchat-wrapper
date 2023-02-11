@@ -111,7 +111,7 @@ class Wrapper(fbchat.Client):
             print("Failed to mark as read")
         self.thread = (thread_id, thread_type)
         self.text = message_object.text
-        self.author = self.utils.getUserName(author_id)
+        self.author = self.utils_getUserName(author_id)
 
         if not self.text: return
 
