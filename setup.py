@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 import os
-VERSION = '0.1.1'
+VERSION = '0.2.0'
 DESCRIPTION = 'Wrapper for fbchat'
 LONG_DESCRIPTION = 'Simple Wrapper Package to make Programming with fbchat easier and simpler to read.'
 
